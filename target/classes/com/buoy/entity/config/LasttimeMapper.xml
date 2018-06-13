@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.LasttimeMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Lasttime" >
+    <id column="lt_id" property="ltId" jdbcType="INTEGER" />
+    <result column="lt_buoy" property="ltBuoy" jdbcType="VARCHAR" />
+    <result column="lt_date" property="ltDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lt_id, lt_buoy, lt_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.LasttimeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lasttime
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lasttime
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lasttime
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.LasttimeExample" >
+    delete from lasttime
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Lasttime" >
+    insert into lasttime (lt_id, lt_buoy, lt_date
+      )
+    values (#{ltId,jdbcType=INTEGER}, #{ltBuoy,jdbcType=VARCHAR}, #{ltDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Lasttime" >
+    insert into lasttime
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ltId != null" >
+        lt_id,
+      </if>
+      <if test="ltBuoy != null" >
+        lt_buoy,
+      </if>
+      <if test="ltDate != null" >
+        lt_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ltId != null" >
+        #{ltId,jdbcType=INTEGER},
+      </if>
+      <if test="ltBuoy != null" >
+        #{ltBuoy,jdbcType=VARCHAR},
+      </if>
+      <if test="ltDate != null" >
+        #{ltDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.LasttimeExample" resultType="java.lang.Integer" >
+    select count(*) from lasttime
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lasttime
+    <set >
+      <if test="record.ltId != null" >
+        lt_id = #{record.ltId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ltBuoy != null" >
+        lt_buoy = #{record.ltBuoy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltDate != null" >
+        lt_date = #{record.ltDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lasttime
+    set lt_id = #{record.ltId,jdbcType=INTEGER},
+      lt_buoy = #{record.ltBuoy,jdbcType=VARCHAR},
+      lt_date = #{record.ltDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Lasttime" >
+    update lasttime
+    <set >
+      <if test="ltBuoy != null" >
+        lt_buoy = #{ltBuoy,jdbcType=VARCHAR},
+      </if>
+      <if test="ltDate != null" >
+        lt_date = #{ltDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Lasttime" >
+    update lasttime
+    set lt_buoy = #{ltBuoy,jdbcType=VARCHAR},
+      lt_date = #{ltDate,jdbcType=VARCHAR}
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByBuoy" >
+  	update lasttime
+  	set lt_date = #{date}
+  	where lt_buoy = #{buoyName}
+  </update>
+  <select id="selectBuoyLastTime" resultType="string">
+  	SELECT DATE FROM buoy 
+  	WHERE DATE <![CDATA[  <= ]]> #{time} AND b_buoyid = #{buoy}
+  	ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+  <select id="selectPreOrNextTime" resultType="string">
+  	SELECT DATE FROM buoy 
+  	WHERE DATE 
+  	<if test="type==1">
+  	<![CDATA[  < ]]>
+  	</if>
+  	<if test="type==0">
+  	<![CDATA[  > ]]>
+  	</if>
+  	<if test="type==2">
+  	<![CDATA[  = ]]>
+  	</if>
+  	 #{time} AND b_buoyid = #{buoy}
+  	ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+<!--   <select id="selectTimeNext" resultType="string">
+  	SELECT DATE FROM buoy 
+  	WHERE DATE <![CDATA[  > ]]> #{time} AND b_buoyid = #{buoy}
+  	ORDER BY DATE DESC LIMIT 0,1;
+  </select> -->
+</mapper>

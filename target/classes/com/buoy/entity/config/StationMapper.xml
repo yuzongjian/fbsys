@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.StationMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Station" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="s_longitude" property="sLongitude" jdbcType="VARCHAR" />
+    <result column="s_latitude" property="sLatitude" jdbcType="VARCHAR" />
+    <result column="s_describe" property="sDescribe" jdbcType="VARCHAR" />
+    <result column="s_station" property="sStation" jdbcType="VARCHAR" />
+    <result column="s_buoyid" property="sBuoyid" jdbcType="VARCHAR" />
+    <result column="s_active" property="sActive" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	SELECT * FROM station where s_active = 0 order by date ;
+  </select>
+  <select id="selectByStation" resultMap="BaseResultMap">
+  	SELECT * FROM station where s_station = #{stationId} and s_active = 0;
+  </select>
+  <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!-- xxx 为java对象属性,必须有setter方法, 指定useGeneratedKeys和keyProperty后，自动增长的字段值会自动赋值给此对象 -->
+  <insert id="saveOrUpdate" useGeneratedKeys="true" keyProperty="sId" parameterType="com.buoy.entity.Station">
+  	INSERT INTO station
+            (s_id,
+             date,
+             s_longitude,
+             s_latitude,
+             s_describe,
+             s_station,
+             s_buoyid)
+	VALUES (
+			#{sId,jdbcType=INTEGER}, 
+			#{date,jdbcType=VARCHAR},
+			#{sLongitude,jdbcType=VARCHAR},
+			#{sLatitude,jdbcType=VARCHAR},
+			#{sDescribe,jdbcType=VARCHAR},
+			#{sStation,jdbcType=VARCHAR},
+			#{sBuoyid,jdbcType=VARCHAR}
+			)
+	ON DUPLICATE KEY UPDATE 
+			 <if test="date != null">
+				 date = #{date,jdbcType=VARCHAR},
+			 </if>
+             	 s_longitude = #{sLongitude,jdbcType=VARCHAR},
+             	 s_latitude = #{sLatitude,jdbcType=VARCHAR},
+             <if test="sDescribe != null">
+             	s_describe = #{sDescribe,jdbcType=VARCHAR},
+             </if>
+             s_station = #{sStation,jdbcType=VARCHAR},
+             s_buoyid = #{sBuoyid,jdbcType=VARCHAR},
+             s_active = #{sActive,jdbcType=INTEGER}
+             ;
+  </insert>
+  
+  <select id="selectByBuoyId" resultMap="BaseResultMap">
+  	SELECT * FROM station where s_buoyid = #{buoyId} and s_active = 0;
+  </select>
+</mapper>

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.WeatherMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Weather" >
+    <id column="w_id" property="wId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="w_buoyid" property="wBuoyid" jdbcType="VARCHAR" />
+    <result column="w_airpre" property="wAirpre" jdbcType="VARCHAR" />
+    <result column="w_airtemp" property="wAirtemp" jdbcType="VARCHAR" />
+    <result column="w_wattemp" property="wWattemp" jdbcType="VARCHAR" />
+    <result column="w_hatchtemp" property="wHatchtemp" jdbcType="VARCHAR" />
+    <result column="w_oppohumi" property="wOppohumi" jdbcType="VARCHAR" />
+    <result column="v_visipulu" property="vVisipulu" jdbcType="VARCHAR" />
+    <result column="w_visibili" property="wVisibili" jdbcType="VARCHAR" />
+    <result column="w_rain" property="wRain" jdbcType="VARCHAR" />
+    <result column="w_rain_hour" property="wRainHour" jdbcType="VARCHAR" />
+    <result column="w_total_rad" property="wTotalRad" jdbcType="VARCHAR" />
+    <result column="w_red_rad" property="wRedRad" jdbcType="VARCHAR" />
+    <result column="w_sun" property="wSun" jdbcType="VARCHAR" />
+    <result column="w_dataid" property="wDataid" jdbcType="VARCHAR" />
+    <result column="w_rain_measure" property="wRainMeasure" jdbcType="VARCHAR" />
+    <result column="w_before_rm" property="wBeforeRm" jdbcType="VARCHAR" />
+    <result column="w_short_rad" property="wShortRad" jdbcType="VARCHAR" />
+    <result column="w_co2" property="wCo2" jdbcType="VARCHAR" />
+    <result column="w_sun_rad" property="wSunRad" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    w_id, date, w_buoyid, w_airpre, w_airtemp, w_wattemp, w_hatchtemp, w_oppohumi, v_visipulu, 
+    w_visibili, w_rain, w_rain_hour, w_total_rad, w_red_rad, w_sun, w_dataid, w_rain_measure, 
+    w_before_rm, w_short_rad, w_co2, w_sun_rad
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.WeatherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from weather
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from weather
+    where w_id = #{wId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from weather
+    where w_id = #{wId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.WeatherExample" >
+    delete from weather
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Weather" >
+    insert into weather (w_id, date, w_buoyid, 
+      w_airpre, w_airtemp, w_wattemp, 
+      w_hatchtemp, w_oppohumi, v_visipulu, 
+      w_visibili, w_rain, w_rain_hour, 
+      w_total_rad, w_red_rad, w_sun, 
+      w_dataid, w_rain_measure, w_before_rm, 
+      w_short_rad, w_co2, w_sun_rad
+      )
+    values (#{wId,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, #{wBuoyid,jdbcType=VARCHAR}, 
+      #{wAirpre,jdbcType=VARCHAR}, #{wAirtemp,jdbcType=VARCHAR}, #{wWattemp,jdbcType=VARCHAR}, 
+      #{wHatchtemp,jdbcType=VARCHAR}, #{wOppohumi,jdbcType=VARCHAR}, #{vVisipulu,jdbcType=VARCHAR}, 
+      #{wVisibili,jdbcType=VARCHAR}, #{wRain,jdbcType=VARCHAR}, #{wRainHour,jdbcType=VARCHAR}, 
+      #{wTotalRad,jdbcType=VARCHAR}, #{wRedRad,jdbcType=VARCHAR}, #{wSun,jdbcType=VARCHAR}, 
+      #{wDataid,jdbcType=VARCHAR}, #{wRainMeasure,jdbcType=VARCHAR}, #{wBeforeRm,jdbcType=VARCHAR}, 
+      #{wShortRad,jdbcType=VARCHAR}, #{wCo2,jdbcType=VARCHAR}, #{wSunRad,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Weather" >
+    insert into weather
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wId != null" >
+        w_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="wBuoyid != null" >
+        w_buoyid,
+      </if>
+      <if test="wAirpre != null" >
+        w_airpre,
+      </if>
+      <if test="wAirtemp != null" >
+        w_airtemp,
+      </if>
+      <if test="wWattemp != null" >
+        w_wattemp,
+      </if>
+      <if test="wHatchtemp != null" >
+        w_hatchtemp,
+      </if>
+      <if test="wOppohumi != null" >
+        w_oppohumi,
+      </if>
+      <if test="vVisipulu != null" >
+        v_visipulu,
+      </if>
+      <if test="wVisibili != null" >
+        w_visibili,
+      </if>
+      <if test="wRain != null" >
+        w_rain,
+      </if>
+      <if test="wRainHour != null" >
+        w_rain_hour,
+      </if>
+      <if test="wTotalRad != null" >
+        w_total_rad,
+      </if>
+      <if test="wRedRad != null" >
+        w_red_rad,
+      </if>
+      <if test="wSun != null" >
+        w_sun,
+      </if>
+      <if test="wDataid != null" >
+        w_dataid,
+      </if>
+      <if test="wRainMeasure != null" >
+        w_rain_measure,
+      </if>
+      <if test="wBeforeRm != null" >
+        w_before_rm,
+      </if>
+      <if test="wShortRad != null" >
+        w_short_rad,
+      </if>
+      <if test="wCo2 != null" >
+        w_co2,
+      </if>
+      <if test="wSunRad != null" >
+        w_sun_rad,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wId != null" >
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="wBuoyid != null" >
+        #{wBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="wAirpre != null" >
+        #{wAirpre,jdbcType=VARCHAR},
+      </if>
+      <if test="wAirtemp != null" >
+        #{wAirtemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wWattemp != null" >
+        #{wWattemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wHatchtemp != null" >
+        #{wHatchtemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wOppohumi != null" >
+        #{wOppohumi,jdbcType=VARCHAR},
+      </if>
+      <if test="vVisipulu != null" >
+        #{vVisipulu,jdbcType=VARCHAR},
+      </if>
+      <if test="wVisibili != null" >
+        #{wVisibili,jdbcType=VARCHAR},
+      </if>
+      <if test="wRain != null" >
+        #{wRain,jdbcType=VARCHAR},
+      </if>
+      <if test="wRainHour != null" >
+        #{wRainHour,jdbcType=VARCHAR},
+      </if>
+      <if test="wTotalRad != null" >
+        #{wTotalRad,jdbcType=VARCHAR},
+      </if>
+      <if test="wRedRad != null" >
+        #{wRedRad,jdbcType=VARCHAR},
+      </if>
+      <if test="wSun != null" >
+        #{wSun,jdbcType=VARCHAR},
+      </if>
+      <if test="wDataid != null" >
+        #{wDataid,jdbcType=VARCHAR},
+      </if>
+      <if test="wRainMeasure != null" >
+        #{wRainMeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="wBeforeRm != null" >
+        #{wBeforeRm,jdbcType=VARCHAR},
+      </if>
+      <if test="wShortRad != null" >
+        #{wShortRad,jdbcType=VARCHAR},
+      </if>
+      <if test="wCo2 != null" >
+        #{wCo2,jdbcType=VARCHAR},
+      </if>
+      <if test="wSunRad != null" >
+        #{wSunRad,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.WeatherExample" resultType="java.lang.Integer" >
+    select count(*) from weather
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update weather
+    <set >
+      <if test="record.wId != null" >
+        w_id = #{record.wId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wBuoyid != null" >
+        w_buoyid = #{record.wBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wAirpre != null" >
+        w_airpre = #{record.wAirpre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wAirtemp != null" >
+        w_airtemp = #{record.wAirtemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wWattemp != null" >
+        w_wattemp = #{record.wWattemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wHatchtemp != null" >
+        w_hatchtemp = #{record.wHatchtemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wOppohumi != null" >
+        w_oppohumi = #{record.wOppohumi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vVisipulu != null" >
+        v_visipulu = #{record.vVisipulu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wVisibili != null" >
+        w_visibili = #{record.wVisibili,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wRain != null" >
+        w_rain = #{record.wRain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wRainHour != null" >
+        w_rain_hour = #{record.wRainHour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wTotalRad != null" >
+        w_total_rad = #{record.wTotalRad,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wRedRad != null" >
+        w_red_rad = #{record.wRedRad,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wSun != null" >
+        w_sun = #{record.wSun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wDataid != null" >
+        w_dataid = #{record.wDataid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wRainMeasure != null" >
+        w_rain_measure = #{record.wRainMeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wBeforeRm != null" >
+        w_before_rm = #{record.wBeforeRm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wShortRad != null" >
+        w_short_rad = #{record.wShortRad,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wCo2 != null" >
+        w_co2 = #{record.wCo2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wSunRad != null" >
+        w_sun_rad = #{record.wSunRad,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update weather
+    set w_id = #{record.wId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=VARCHAR},
+      w_buoyid = #{record.wBuoyid,jdbcType=VARCHAR},
+      w_airpre = #{record.wAirpre,jdbcType=VARCHAR},
+      w_airtemp = #{record.wAirtemp,jdbcType=VARCHAR},
+      w_wattemp = #{record.wWattemp,jdbcType=VARCHAR},
+      w_hatchtemp = #{record.wHatchtemp,jdbcType=VARCHAR},
+      w_oppohumi = #{record.wOppohumi,jdbcType=VARCHAR},
+      v_visipulu = #{record.vVisipulu,jdbcType=VARCHAR},
+      w_visibili = #{record.wVisibili,jdbcType=VARCHAR},
+      w_rain = #{record.wRain,jdbcType=VARCHAR},
+      w_rain_hour = #{record.wRainHour,jdbcType=VARCHAR},
+      w_total_rad = #{record.wTotalRad,jdbcType=VARCHAR},
+      w_red_rad = #{record.wRedRad,jdbcType=VARCHAR},
+      w_sun = #{record.wSun,jdbcType=VARCHAR},
+      w_dataid = #{record.wDataid,jdbcType=VARCHAR},
+      w_rain_measure = #{record.wRainMeasure,jdbcType=VARCHAR},
+      w_before_rm = #{record.wBeforeRm,jdbcType=VARCHAR},
+      w_short_rad = #{record.wShortRad,jdbcType=VARCHAR},
+      w_co2 = #{record.wCo2,jdbcType=VARCHAR},
+      w_sun_rad = #{record.wSunRad,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Weather" >
+    update weather
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="wBuoyid != null" >
+        w_buoyid = #{wBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="wAirpre != null" >
+        w_airpre = #{wAirpre,jdbcType=VARCHAR},
+      </if>
+      <if test="wAirtemp != null" >
+        w_airtemp = #{wAirtemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wWattemp != null" >
+        w_wattemp = #{wWattemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wHatchtemp != null" >
+        w_hatchtemp = #{wHatchtemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wOppohumi != null" >
+        w_oppohumi = #{wOppohumi,jdbcType=VARCHAR},
+      </if>
+      <if test="vVisipulu != null" >
+        v_visipulu = #{vVisipulu,jdbcType=VARCHAR},
+      </if>
+      <if test="wVisibili != null" >
+        w_visibili = #{wVisibili,jdbcType=VARCHAR},
+      </if>
+      <if test="wRain != null" >
+        w_rain = #{wRain,jdbcType=VARCHAR},
+      </if>
+      <if test="wRainHour != null" >
+        w_rain_hour = #{wRainHour,jdbcType=VARCHAR},
+      </if>
+      <if test="wTotalRad != null" >
+        w_total_rad = #{wTotalRad,jdbcType=VARCHAR},
+      </if>
+      <if test="wRedRad != null" >
+        w_red_rad = #{wRedRad,jdbcType=VARCHAR},
+      </if>
+      <if test="wSun != null" >
+        w_sun = #{wSun,jdbcType=VARCHAR},
+      </if>
+      <if test="wDataid != null" >
+        w_dataid = #{wDataid,jdbcType=VARCHAR},
+      </if>
+      <if test="wRainMeasure != null" >
+        w_rain_measure = #{wRainMeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="wBeforeRm != null" >
+        w_before_rm = #{wBeforeRm,jdbcType=VARCHAR},
+      </if>
+      <if test="wShortRad != null" >
+        w_short_rad = #{wShortRad,jdbcType=VARCHAR},
+      </if>
+      <if test="wCo2 != null" >
+        w_co2 = #{wCo2,jdbcType=VARCHAR},
+      </if>
+      <if test="wSunRad != null" >
+        w_sun_rad = #{wSunRad,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Weather" >
+    update weather
+    set date = #{date,jdbcType=VARCHAR},
+      w_buoyid = #{wBuoyid,jdbcType=VARCHAR},
+      w_airpre = #{wAirpre,jdbcType=VARCHAR},
+      w_airtemp = #{wAirtemp,jdbcType=VARCHAR},
+      w_wattemp = #{wWattemp,jdbcType=VARCHAR},
+      w_hatchtemp = #{wHatchtemp,jdbcType=VARCHAR},
+      w_oppohumi = #{wOppohumi,jdbcType=VARCHAR},
+      v_visipulu = #{vVisipulu,jdbcType=VARCHAR},
+      w_visibili = #{wVisibili,jdbcType=VARCHAR},
+      w_rain = #{wRain,jdbcType=VARCHAR},
+      w_rain_hour = #{wRainHour,jdbcType=VARCHAR},
+      w_total_rad = #{wTotalRad,jdbcType=VARCHAR},
+      w_red_rad = #{wRedRad,jdbcType=VARCHAR},
+      w_sun = #{wSun,jdbcType=VARCHAR},
+      w_dataid = #{wDataid,jdbcType=VARCHAR},
+      w_rain_measure = #{wRainMeasure,jdbcType=VARCHAR},
+      w_before_rm = #{wBeforeRm,jdbcType=VARCHAR},
+      w_short_rad = #{wShortRad,jdbcType=VARCHAR},
+      w_co2 = #{wCo2,jdbcType=VARCHAR},
+      w_sun_rad = #{wSunRad,jdbcType=VARCHAR}
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+    <select id="selectTheLast"  resultMap="BaseResultMap" parameterType="string">
+    	SELECT * FROM weather WHERE  DATE <![CDATA[     <=    ]]> 
+
+	<!-- ( SELECT lt_date FROM lasttime WHERE lt_buoy = 'weather' ) -->
+	( SELECT weather FROM receive_time where buoy_name = #{buoyId} and status = 0)
+	
+	AND w_buoyid = #{buoyId} ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+  <select id="selectTheLast24" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM weather WHERE w_buoyid = #{buoyId} ORDER BY date DESC LIMIT 0,24;
+  </select>
+  <select id="selectDateByDay"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM weather WHERE w_buoyid = #{buoyId} AND DATE = #{time}
+  </select>
+  <select id="selectTheLast24WithTime" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM weather WHERE w_buoyid = #{buoyId} AND date &lt;= #{time} ORDER BY date DESC LIMIT 0,24;
+  </select>
+  <select id="selectBetweenDay" resultMap="BaseResultMap" parameterType="string">
+  	SELECT *
+	FROM weather
+	WHERE w_buoyid = #{buoyId}
+		<choose>
+                <when test="fromDay != null and toDay !=null">
+                       AND DATE BETWEEN CONCAT(#{fromDay},'0000')
+    					AND CONCAT(#{toDay},'2359')
+	          			ORDER BY DATE DESC;
+                </when>
+                <otherwise>
+                       ORDER BY date DESC LIMIT 0,24;
+                 </otherwise>
+         </choose>
+  </select>
+</mapper>

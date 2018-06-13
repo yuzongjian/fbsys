@@ -1,0 +1,520 @@
+.container{
+	background: url(../images/bg.jpg) no-repeat;
+	background-size: 150% 100%;
+	font-size: 14px;
+	float: left;
+	margin-left: 60px;
+}
+
+.container .operate{
+	padding:20px 0;
+}
+
+.container > h1 span{
+	margin: 0 auto;
+	display: block;
+}
+
+.choose .choose-btn{
+	border:1px solid #999;
+	background-color: #fff;
+	border-radius: 5px;
+	line-height: 22px;
+	color: #999;
+	width: 130px;
+	float: left;
+	padding-left:5px;
+	margin-right: 20px;
+	position: relative;
+}
+
+.choose .zhanwei{
+	width:160px;
+}
+
+.choose input{
+	color: rgb(255, 255, 255);
+    margin-right: 20px;
+    width: 100px;
+    font-size: 14px;
+    background-color: rgb(50, 142, 209);
+    font-family: 微软雅黑;
+    cursor: pointer;
+    padding: 0px 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(124, 187, 231);
+    border-image: initial;
+}
+
+.choose .calendar-box > a{
+	color: #fff;
+	font-size: 18px;
+    line-height: 20px;
+}
+
+.choose .choose-btn a{
+	color: #999;
+	display: block;
+}
+
+.choose .choose-btn div a{
+	display: block;
+	padding:0 5px;
+	border-left: 1px solid #999;
+	float: right;
+}
+
+.choose .choose-btn div label{
+	display: block;
+	float: left;
+}
+
+.choose .zhanwei div label{
+	width: 132px;
+}
+
+.choose .fubiao div label{
+	width: 102px;
+}
+
+.choose .zhanwei div label{
+	width: 132px;
+}
+
+.choose-active div label span{
+	background-color: #bbe6fd;
+}
+
+.choose .choose-btn .down-box,.num{
+	position: absolute;
+	background-color: #fff;
+	left: 0;
+	top:22px;
+	width: 100%;
+	display: none;
+	max-height: 120px;
+	overflow: auto;
+}
+
+.choose .choose-btn .down-box::-webkit-scrollbar{
+    width: 8px;
+    height: 16px;
+    background-color: #f5f5f5;
+}
+
+/*定义滚动条的轨道，内阴影及圆角*/
+.choose .choose-btn .down-box::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+/*定义滑块，内阴影及圆角*/
+.choose .choose-btn .down-box::-webkit-scrollbar-thumb{
+    height: 20px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #ddd;
+}
+
+.choose .down-box li{
+	line-height: 20px;
+}
+
+.choose .zhanwei .down-box li a,.choose .fubiao .down-box li a{
+	padding: 0 10px;
+}
+
+.choose .choose-btn .down-box li a:hover,.li-active{
+	background-color: #bbe6fd;
+}
+
+.choose .calendar .down-box{
+	width: 128px;
+	text-align: center;
+}
+
+.choose .calendar{
+	width:150px;
+}
+
+.choose > a{
+	color: #fff;
+	font-size: 18px;
+	line-height: 20px;
+}
+
+.three{
+	padding-top: 20px;
+}
+
+.three .three-box{
+	float: left;
+	color: #484848;
+	height:90px;
+	font-size: 16px;
+}
+
+.three .three-box .left-box i{
+	font-size: 28px;
+}
+
+.three .three-box .left-box p{
+	line-height: 24px;
+}
+
+.three .three-box .left-box{
+	background-color: #f1f0f1;
+	float: left;
+	display: block;
+	width: 33%;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	height:50px;
+	text-align: center;
+	padding: 20px 0;
+}
+
+.three .three-box .location{
+	padding:0;
+	padding-bottom: 40px;
+}
+
+.three .three-box .location i:nth-child(1){
+	padding-top: 10px;
+}
+
+.three .three-box .location p:nth-child(3){
+	font-size: 14px;
+	padding-bottom: 10px;
+}
+
+.three .three-box .right-box{
+	background-color: #ebebeb;
+	float: left;
+	display: block;
+	width: 67%;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	height:90px;
+	padding: 5px 0;
+	background-image: url(../images/ten.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.three .three-box .right-box .detail p:first-child{
+	color: #000!important;
+}
+
+.three .three-box:first-child .right-box .detail:nth-child(n+3) p:first-child{
+	color: #838282!important;
+}
+
+.three .three-box:first-child .right-box .detail:nth-child(3),.three .three-box:first-child .right-box .detail:nth-child(4){
+	color: #838282!important;
+}
+
+.three .three-box .right-box .detail{
+	width: 50%;
+	float: left;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+}
+
+.three .three-box .right-box .detail div{
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	margin:0 auto;
+}
+
+.factor{
+	padding-top: 20px;
+}
+
+.factor .left-factor{
+	float: left;
+	width: 55%;
+	margin-right: 3%;
+}
+
+.factor .left-factor .left-factor-box{
+	border-radius: 10px;
+	background-color: #fff;
+	padding:10px 20px;
+	margin-bottom: 20px;
+}
+
+.factor .left-factor .change{
+	margin-bottom: 0;
+}
+
+.factor .left-factor .left-factor-box .factor-detail{
+	float: left;
+	width: 33.3%;
+	font-size: 16px;
+	text-align: center;
+}
+
+.factor .left-factor .left-factor-box div .factor-detail p:first-child{
+	line-height: 30px;
+}
+
+.factor .left-factor .left-factor-box div .factor-detail p:last-child{
+	border-left:1px solid #e3e3e5;
+	line-height: 30px;
+}
+
+.factor .left-factor .left-factor-box div .factor-detail:first-child p{
+	border:0;
+}
+
+.factor .left-factor .left-factor-box div .factor-detail p a{
+	display: block;
+	width: 100%;
+	color: #484848;
+}
+
+.factor .left-factor .left-factor-box > p{
+	font-size: 20px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.factor .left-factor .qixiang > p{
+	color: #f1ce4f;
+	padding-bottom: 5px;
+}
+
+.factor .left-factor .shuiwen > p{
+	color: #ff6c60;
+}
+
+.factor .left-factor .change > p{
+	color: #f88920;
+}
+
+#zhexian{
+	margin-top: -40px;
+}
+
+.factor .right{
+	float: left;
+	width: 42%;
+}
+
+.factor .right-factor{
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 10px 0;
+	margin-bottom: 20px;
+}
+
+.factor .right-factor:last-child{
+	margin-bottom: 0;
+}
+
+.factor .right-factor .right-factor-box .haha > span{
+	font-size: 20px;
+	line-height: 40px;
+	padding-left:15px;
+	display: inline-block;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+.factor .right-factor .hailiu{
+	position: relative;
+}
+
+.factor .right-factor .hailiu .haha > span{
+	color: #8175c7;
+}
+
+.factor .right-factor .hailiu .haha a{
+	color: #484848;
+	padding:0 20px;
+}
+
+.factor .right-factor .hailiu div.bearing{
+	position: absolute;
+	right: 40px;
+	top:-8px;
+}
+
+.factor .right-factor .hailiu div.bearing img.clock{
+	float: left;
+}
+
+.factor .right-factor .hailiu div.bearing span{
+	left:60px;
+	top:50%;
+	margin-top: -6px;
+	width: 20px;
+}
+
+.factor .right-factor .right-factor-box .bearing{
+	display: inline-block;
+	position: relative;
+	height:57px;
+}
+
+.factor .right-factor .right-factor-box .bearing > div{
+	height:58px;
+}
+
+.factor .right-factor .right-factor-box .bearing .second{
+	position: absolute;
+	z-index: 10;
+	width:16%;
+	height:auto;
+	top:20%;
+	left:42%;
+	-webkit-transform-origin:center 95%;
+	-o-transform-origin:center 95%;
+	-ms-transform-origin:center 95%;
+	-moz-transform-origin:center 95%;
+	transform-origin:center 95%;
+}
+
+.factor .right-factor .right-factor-box .bearing img{
+	width:60px;
+}
+
+.factor .right-factor .right-factor-box .bearing span{
+	font-size: 12px;
+	position: absolute;
+	left: 22px;
+}
+
+.factor .right-factor .right-factor-box .factor-detail{
+	float: left;
+	width: 33%;
+	font-size: 14px;
+	padding:0 10px;
+	line-height: 25px;
+}
+
+.factor .right-factor .right-factor-box .factor-detail{
+	border-right: 1px solid #d8d8d8; 
+	width: 30%;
+}
+
+.factor .right-factor .right-factor-box .factor-detail:nth-child(3){
+	border-right: 0; 
+	width: 40%;
+}
+
+.factor .right-factor .right-factor-box .factor-detail span:nth-child(2){
+	padding-left: 20px;
+}
+
+.factor .right-factor .table-factor{
+	padding: 0 20px;
+}
+
+.factor .right-factor .right-factor-box table{
+	width: 100%;
+}
+
+.factor .right-factor .right-factor-box table tr:nth-child(n+1) td{
+	line-height: 25px;
+}
+
+.factor .right-factor .right-factor-box table tr{
+	border-top: 1px solid #d9d9d9;
+}
+
+.factor .right-factor .right-factor-box table tr:first-child{
+	border-top: 0;
+}
+
+.factor .right-factor .right-factor-box table tr td,.factor .right-factor .right-factor-box table tr th{
+	border-left: 1px solid #d9d9d9;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+.factor .right-factor .right-factor-box table tr td:first-child,.factor .right-factor .right-factor-box table tr th:first-child{
+	border-left: 0;
+}
+
+.factor .right-factor .right-factor-box table tr td a{
+	display: block;
+	width: 100%;
+	color: #484848;
+}
+
+.factor .right-factor .right-factor-box table .table-head{
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.factor .right-factor .bo table .table-head{
+	color: #01a89e;
+}
+
+.factor .right-factor .wind table .table-head{
+	color: #4fb5db;
+}
+
+.factor .right-factor .right-factor-box table .bearing{
+	display: block;
+	width: 100%;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.factor .right-factor .right-factor-box table .bearing div{
+	display: inline-block;
+	position: relative;
+}
+
+.factor .right-factor .right-factor-box table td span{
+	font-size: 11px;;
+	display: inline-block;
+	position: relative;
+	top:-2px;
+}
+
+.warning{
+	position: relative;
+	margin-top: 12px;
+	height:29px;
+}
+
+.warning .warning-box{
+	position: absolute;
+	background-color: rgb(247,238,66);
+	border:1px solid #fff;
+	padding: 0 10px;
+	width: 373px;
+	box-shadow: 1px 1px 8px rgba(0,0,0,.3);
+	z-index: 1;
+}
+
+.warning .warning-box p{
+	line-height: 25px;
+	text-align: center;
+}
+
+.warning .warning-box p span{
+	float: left;
+	color: #333;
+}
+
+.warning .warning-box p span i{
+	color: #ff6c60;
+	font-size: 16px;
+	margin-right: 10px;
+}
+
+.warning .warning-box p a{
+	float: right;
+	margin-top: 2px;
+}

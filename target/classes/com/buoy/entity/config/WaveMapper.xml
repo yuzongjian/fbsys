@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.WaveMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Wave" >
+    <id column="w_id" property="wId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="w_buoyid" property="wBuoyid" jdbcType="VARCHAR" />
+    <result column="w_high_max" property="wHighMax" jdbcType="VARCHAR" />
+    <result column="w_high_tenth" property="wHighTenth" jdbcType="VARCHAR" />
+    <result column="w_high_average" property="wHighAverage" jdbcType="VARCHAR" />
+    <result column="w_high_effective" property="wHighEffective" jdbcType="VARCHAR" />
+    <result column="w_cycle_max" property="wCycleMax" jdbcType="VARCHAR" />
+    <result column="w_cycle_tenth" property="wCycleTenth" jdbcType="VARCHAR" />
+    <result column="w_cycle_average" property="wCycleAverage" jdbcType="VARCHAR" />
+    <result column="w_cycle_effective" property="wCycleEffective" jdbcType="VARCHAR" />
+    <result column="w_to" property="wTo" jdbcType="VARCHAR" />
+    <result column="w_count" property="wCount" jdbcType="VARCHAR" />
+    <result column="w_dateid" property="wDateid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    w_id, date, w_buoyid, w_high_max, w_high_tenth, w_high_average, w_high_effective, 
+    w_cycle_max, w_cycle_tenth, w_cycle_average, w_cycle_effective, w_to, w_count, w_dateid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.WaveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wave
+    where w_id = #{wId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wave
+    where w_id = #{wId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.WaveExample" >
+    delete from wave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Wave" >
+    insert into wave (w_id, date, w_buoyid, 
+      w_high_max, w_high_tenth, w_high_average, 
+      w_high_effective, w_cycle_max, w_cycle_tenth, 
+      w_cycle_average, w_cycle_effective, w_to, 
+      w_count, w_dateid)
+    values (#{wId,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, #{wBuoyid,jdbcType=VARCHAR}, 
+      #{wHighMax,jdbcType=VARCHAR}, #{wHighTenth,jdbcType=VARCHAR}, #{wHighAverage,jdbcType=VARCHAR}, 
+      #{wHighEffective,jdbcType=VARCHAR}, #{wCycleMax,jdbcType=VARCHAR}, #{wCycleTenth,jdbcType=VARCHAR}, 
+      #{wCycleAverage,jdbcType=VARCHAR}, #{wCycleEffective,jdbcType=VARCHAR}, #{wTo,jdbcType=VARCHAR}, 
+      #{wCount,jdbcType=VARCHAR}, #{wDateid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Wave" >
+    insert into wave
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wId != null" >
+        w_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="wBuoyid != null" >
+        w_buoyid,
+      </if>
+      <if test="wHighMax != null" >
+        w_high_max,
+      </if>
+      <if test="wHighTenth != null" >
+        w_high_tenth,
+      </if>
+      <if test="wHighAverage != null" >
+        w_high_average,
+      </if>
+      <if test="wHighEffective != null" >
+        w_high_effective,
+      </if>
+      <if test="wCycleMax != null" >
+        w_cycle_max,
+      </if>
+      <if test="wCycleTenth != null" >
+        w_cycle_tenth,
+      </if>
+      <if test="wCycleAverage != null" >
+        w_cycle_average,
+      </if>
+      <if test="wCycleEffective != null" >
+        w_cycle_effective,
+      </if>
+      <if test="wTo != null" >
+        w_to,
+      </if>
+      <if test="wCount != null" >
+        w_count,
+      </if>
+      <if test="wDateid != null" >
+        w_dateid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wId != null" >
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="wBuoyid != null" >
+        #{wBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighMax != null" >
+        #{wHighMax,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighTenth != null" >
+        #{wHighTenth,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighAverage != null" >
+        #{wHighAverage,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighEffective != null" >
+        #{wHighEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleMax != null" >
+        #{wCycleMax,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleTenth != null" >
+        #{wCycleTenth,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleAverage != null" >
+        #{wCycleAverage,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleEffective != null" >
+        #{wCycleEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="wTo != null" >
+        #{wTo,jdbcType=VARCHAR},
+      </if>
+      <if test="wCount != null" >
+        #{wCount,jdbcType=VARCHAR},
+      </if>
+      <if test="wDateid != null" >
+        #{wDateid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.WaveExample" resultType="java.lang.Integer" >
+    select count(*) from wave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wave
+    <set >
+      <if test="record.wId != null" >
+        w_id = #{record.wId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wBuoyid != null" >
+        w_buoyid = #{record.wBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wHighMax != null" >
+        w_high_max = #{record.wHighMax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wHighTenth != null" >
+        w_high_tenth = #{record.wHighTenth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wHighAverage != null" >
+        w_high_average = #{record.wHighAverage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wHighEffective != null" >
+        w_high_effective = #{record.wHighEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wCycleMax != null" >
+        w_cycle_max = #{record.wCycleMax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wCycleTenth != null" >
+        w_cycle_tenth = #{record.wCycleTenth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wCycleAverage != null" >
+        w_cycle_average = #{record.wCycleAverage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wCycleEffective != null" >
+        w_cycle_effective = #{record.wCycleEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wTo != null" >
+        w_to = #{record.wTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wCount != null" >
+        w_count = #{record.wCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wDateid != null" >
+        w_dateid = #{record.wDateid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wave
+    set w_id = #{record.wId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=VARCHAR},
+      w_buoyid = #{record.wBuoyid,jdbcType=VARCHAR},
+      w_high_max = #{record.wHighMax,jdbcType=VARCHAR},
+      w_high_tenth = #{record.wHighTenth,jdbcType=VARCHAR},
+      w_high_average = #{record.wHighAverage,jdbcType=VARCHAR},
+      w_high_effective = #{record.wHighEffective,jdbcType=VARCHAR},
+      w_cycle_max = #{record.wCycleMax,jdbcType=VARCHAR},
+      w_cycle_tenth = #{record.wCycleTenth,jdbcType=VARCHAR},
+      w_cycle_average = #{record.wCycleAverage,jdbcType=VARCHAR},
+      w_cycle_effective = #{record.wCycleEffective,jdbcType=VARCHAR},
+      w_to = #{record.wTo,jdbcType=VARCHAR},
+      w_count = #{record.wCount,jdbcType=VARCHAR},
+      w_dateid = #{record.wDateid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Wave" >
+    update wave
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="wBuoyid != null" >
+        w_buoyid = #{wBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighMax != null" >
+        w_high_max = #{wHighMax,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighTenth != null" >
+        w_high_tenth = #{wHighTenth,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighAverage != null" >
+        w_high_average = #{wHighAverage,jdbcType=VARCHAR},
+      </if>
+      <if test="wHighEffective != null" >
+        w_high_effective = #{wHighEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleMax != null" >
+        w_cycle_max = #{wCycleMax,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleTenth != null" >
+        w_cycle_tenth = #{wCycleTenth,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleAverage != null" >
+        w_cycle_average = #{wCycleAverage,jdbcType=VARCHAR},
+      </if>
+      <if test="wCycleEffective != null" >
+        w_cycle_effective = #{wCycleEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="wTo != null" >
+        w_to = #{wTo,jdbcType=VARCHAR},
+      </if>
+      <if test="wCount != null" >
+        w_count = #{wCount,jdbcType=VARCHAR},
+      </if>
+      <if test="wDateid != null" >
+        w_dateid = #{wDateid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Wave" >
+    update wave
+    set date = #{date,jdbcType=VARCHAR},
+      w_buoyid = #{wBuoyid,jdbcType=VARCHAR},
+      w_high_max = #{wHighMax,jdbcType=VARCHAR},
+      w_high_tenth = #{wHighTenth,jdbcType=VARCHAR},
+      w_high_average = #{wHighAverage,jdbcType=VARCHAR},
+      w_high_effective = #{wHighEffective,jdbcType=VARCHAR},
+      w_cycle_max = #{wCycleMax,jdbcType=VARCHAR},
+      w_cycle_tenth = #{wCycleTenth,jdbcType=VARCHAR},
+      w_cycle_average = #{wCycleAverage,jdbcType=VARCHAR},
+      w_cycle_effective = #{wCycleEffective,jdbcType=VARCHAR},
+      w_to = #{wTo,jdbcType=VARCHAR},
+      w_count = #{wCount,jdbcType=VARCHAR},
+      w_dateid = #{wDateid,jdbcType=VARCHAR}
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+   <select id="selectTheLast"  resultMap="BaseResultMap" parameterType="string">
+	
+	SELECT * FROM wave WHERE  DATE <![CDATA[     <=    ]]> 
+
+	<!-- ( SELECT lt_date FROM lasttime WHERE lt_buoy = 'wave' ) -->
+	( SELECT wave FROM receive_time where buoy_name = #{buoyId} and status = 0) 
+	
+	AND w_buoyid = #{buoyId} ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+    <select id="selectTheLast24" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM wave WHERE w_buoyid = #{buoyId} ORDER BY date DESC LIMIT 0,24;
+  </select>
+   <select id="selectDateByDay"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM wave WHERE w_buoyid = #{buoyId} AND DATE = #{time}
+  </select>
+  <select id="selectTheLast24WithTime" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM wave WHERE w_buoyid = #{buoyId} AND date &lt;= #{time} ORDER BY date DESC LIMIT 0,24;
+  </select>
+    <select id="selectBetweenDay" resultMap="BaseResultMap" parameterType="string">
+  	SELECT *
+	FROM wave
+	WHERE w_buoyid = #{buoyId}
+		<choose>
+                <when test="fromDay != null and toDay !=null">
+                       <!-- AND (DATE LIKE CONCAT(#{fromDay},'%')
+	          			OR DATE LIKE CONCAT(#{toDay},'%')) -->
+	          			AND DATE BETWEEN CONCAT(#{fromDay},'0000')
+    					AND CONCAT(#{toDay},'2359')
+	          			ORDER BY DATE DESC;
+                </when>
+                <otherwise>
+                       ORDER BY date DESC LIMIT 0,24;
+                 </otherwise>
+         </choose>
+  </select>
+</mapper>

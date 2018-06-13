@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.WaterqualityMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Waterquality" >
+    <id column="wq_id" property="wqId" jdbcType="INTEGER" />
+    <result column="wq_buoyid" property="wqBuoyid" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="wq_wattemp" property="wqWattemp" jdbcType="VARCHAR" />
+    <result column="wq_seatemp" property="wqSeatemp" jdbcType="VARCHAR" />
+    <result column="wq_indeptemp" property="wqIndeptemp" jdbcType="VARCHAR" />
+    <result column="wq_temp" property="wqTemp" jdbcType="VARCHAR" />
+    <result column="wq_salinity" property="wqSalinity" jdbcType="VARCHAR" />
+    <result column="wq_conductivity" property="wqConductivity" jdbcType="VARCHAR" />
+    <result column="wq_DO" property="wqDo" jdbcType="VARCHAR" />
+    <result column="wq_PH" property="wqPh" jdbcType="VARCHAR" />
+    <result column="wq_turbidity" property="wqTurbidity" jdbcType="VARCHAR" />
+    <result column="wq_chll" property="wqChll" jdbcType="VARCHAR" />
+    <result column="wq_saltemp" property="wqSaltemp" jdbcType="VARCHAR" />
+    <result column="wq_co2" property="wqCo2" jdbcType="VARCHAR" />
+    <result column="wq_sc" property="wqSc" jdbcType="VARCHAR" />
+    <result column="wq_datafrom" property="wqDatafrom" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wq_id, wq_buoyid, date, wq_wattemp, wq_seatemp, wq_indeptemp, wq_temp, wq_salinity, 
+    wq_conductivity, wq_DO, wq_PH, wq_turbidity, wq_chll, wq_saltemp, wq_co2, wq_sc, 
+    wq_datafrom
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.WaterqualityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from waterquality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from waterquality
+    where wq_id = #{wqId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waterquality
+    where wq_id = #{wqId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.WaterqualityExample" >
+    delete from waterquality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Waterquality" >
+    insert into waterquality (wq_id, wq_buoyid, date, 
+      wq_wattemp, wq_seatemp, wq_indeptemp, 
+      wq_temp, wq_salinity, wq_conductivity, 
+      wq_DO, wq_PH, wq_turbidity, 
+      wq_chll, wq_saltemp, wq_co2, 
+      wq_sc, wq_datafrom)
+    values (#{wqId,jdbcType=INTEGER}, #{wqBuoyid,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+      #{wqWattemp,jdbcType=VARCHAR}, #{wqSeatemp,jdbcType=VARCHAR}, #{wqIndeptemp,jdbcType=VARCHAR}, 
+      #{wqTemp,jdbcType=VARCHAR}, #{wqSalinity,jdbcType=VARCHAR}, #{wqConductivity,jdbcType=VARCHAR}, 
+      #{wqDo,jdbcType=VARCHAR}, #{wqPh,jdbcType=VARCHAR}, #{wqTurbidity,jdbcType=VARCHAR}, 
+      #{wqChll,jdbcType=VARCHAR}, #{wqSaltemp,jdbcType=VARCHAR}, #{wqCo2,jdbcType=VARCHAR}, 
+      #{wqSc,jdbcType=VARCHAR}, #{wqDatafrom,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Waterquality" >
+    insert into waterquality
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wqId != null" >
+        wq_id,
+      </if>
+      <if test="wqBuoyid != null" >
+        wq_buoyid,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="wqWattemp != null" >
+        wq_wattemp,
+      </if>
+      <if test="wqSeatemp != null" >
+        wq_seatemp,
+      </if>
+      <if test="wqIndeptemp != null" >
+        wq_indeptemp,
+      </if>
+      <if test="wqTemp != null" >
+        wq_temp,
+      </if>
+      <if test="wqSalinity != null" >
+        wq_salinity,
+      </if>
+      <if test="wqConductivity != null" >
+        wq_conductivity,
+      </if>
+      <if test="wqDo != null" >
+        wq_DO,
+      </if>
+      <if test="wqPh != null" >
+        wq_PH,
+      </if>
+      <if test="wqTurbidity != null" >
+        wq_turbidity,
+      </if>
+      <if test="wqChll != null" >
+        wq_chll,
+      </if>
+      <if test="wqSaltemp != null" >
+        wq_saltemp,
+      </if>
+      <if test="wqCo2 != null" >
+        wq_co2,
+      </if>
+      <if test="wqSc != null" >
+        wq_sc,
+      </if>
+      <if test="wqDatafrom != null" >
+        wq_datafrom,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wqId != null" >
+        #{wqId,jdbcType=INTEGER},
+      </if>
+      <if test="wqBuoyid != null" >
+        #{wqBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="wqWattemp != null" >
+        #{wqWattemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSeatemp != null" >
+        #{wqSeatemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqIndeptemp != null" >
+        #{wqIndeptemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqTemp != null" >
+        #{wqTemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSalinity != null" >
+        #{wqSalinity,jdbcType=VARCHAR},
+      </if>
+      <if test="wqConductivity != null" >
+        #{wqConductivity,jdbcType=VARCHAR},
+      </if>
+      <if test="wqDo != null" >
+        #{wqDo,jdbcType=VARCHAR},
+      </if>
+      <if test="wqPh != null" >
+        #{wqPh,jdbcType=VARCHAR},
+      </if>
+      <if test="wqTurbidity != null" >
+        #{wqTurbidity,jdbcType=VARCHAR},
+      </if>
+      <if test="wqChll != null" >
+        #{wqChll,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSaltemp != null" >
+        #{wqSaltemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqCo2 != null" >
+        #{wqCo2,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSc != null" >
+        #{wqSc,jdbcType=VARCHAR},
+      </if>
+      <if test="wqDatafrom != null" >
+        #{wqDatafrom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.WaterqualityExample" resultType="java.lang.Integer" >
+    select count(*) from waterquality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update waterquality
+    <set >
+      <if test="record.wqId != null" >
+        wq_id = #{record.wqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wqBuoyid != null" >
+        wq_buoyid = #{record.wqBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqWattemp != null" >
+        wq_wattemp = #{record.wqWattemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqSeatemp != null" >
+        wq_seatemp = #{record.wqSeatemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqIndeptemp != null" >
+        wq_indeptemp = #{record.wqIndeptemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqTemp != null" >
+        wq_temp = #{record.wqTemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqSalinity != null" >
+        wq_salinity = #{record.wqSalinity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqConductivity != null" >
+        wq_conductivity = #{record.wqConductivity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqDo != null" >
+        wq_DO = #{record.wqDo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqPh != null" >
+        wq_PH = #{record.wqPh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqTurbidity != null" >
+        wq_turbidity = #{record.wqTurbidity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqChll != null" >
+        wq_chll = #{record.wqChll,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqSaltemp != null" >
+        wq_saltemp = #{record.wqSaltemp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqCo2 != null" >
+        wq_co2 = #{record.wqCo2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqSc != null" >
+        wq_sc = #{record.wqSc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wqDatafrom != null" >
+        wq_datafrom = #{record.wqDatafrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update waterquality
+    set wq_id = #{record.wqId,jdbcType=INTEGER},
+      wq_buoyid = #{record.wqBuoyid,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
+      wq_wattemp = #{record.wqWattemp,jdbcType=VARCHAR},
+      wq_seatemp = #{record.wqSeatemp,jdbcType=VARCHAR},
+      wq_indeptemp = #{record.wqIndeptemp,jdbcType=VARCHAR},
+      wq_temp = #{record.wqTemp,jdbcType=VARCHAR},
+      wq_salinity = #{record.wqSalinity,jdbcType=VARCHAR},
+      wq_conductivity = #{record.wqConductivity,jdbcType=VARCHAR},
+      wq_DO = #{record.wqDo,jdbcType=VARCHAR},
+      wq_PH = #{record.wqPh,jdbcType=VARCHAR},
+      wq_turbidity = #{record.wqTurbidity,jdbcType=VARCHAR},
+      wq_chll = #{record.wqChll,jdbcType=VARCHAR},
+      wq_saltemp = #{record.wqSaltemp,jdbcType=VARCHAR},
+      wq_co2 = #{record.wqCo2,jdbcType=VARCHAR},
+      wq_sc = #{record.wqSc,jdbcType=VARCHAR},
+      wq_datafrom = #{record.wqDatafrom,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Waterquality" >
+    update waterquality
+    <set >
+      <if test="wqBuoyid != null" >
+        wq_buoyid = #{wqBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="wqWattemp != null" >
+        wq_wattemp = #{wqWattemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSeatemp != null" >
+        wq_seatemp = #{wqSeatemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqIndeptemp != null" >
+        wq_indeptemp = #{wqIndeptemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqTemp != null" >
+        wq_temp = #{wqTemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSalinity != null" >
+        wq_salinity = #{wqSalinity,jdbcType=VARCHAR},
+      </if>
+      <if test="wqConductivity != null" >
+        wq_conductivity = #{wqConductivity,jdbcType=VARCHAR},
+      </if>
+      <if test="wqDo != null" >
+        wq_DO = #{wqDo,jdbcType=VARCHAR},
+      </if>
+      <if test="wqPh != null" >
+        wq_PH = #{wqPh,jdbcType=VARCHAR},
+      </if>
+      <if test="wqTurbidity != null" >
+        wq_turbidity = #{wqTurbidity,jdbcType=VARCHAR},
+      </if>
+      <if test="wqChll != null" >
+        wq_chll = #{wqChll,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSaltemp != null" >
+        wq_saltemp = #{wqSaltemp,jdbcType=VARCHAR},
+      </if>
+      <if test="wqCo2 != null" >
+        wq_co2 = #{wqCo2,jdbcType=VARCHAR},
+      </if>
+      <if test="wqSc != null" >
+        wq_sc = #{wqSc,jdbcType=VARCHAR},
+      </if>
+      <if test="wqDatafrom != null" >
+        wq_datafrom = #{wqDatafrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wq_id = #{wqId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Waterquality" >
+    update waterquality
+    set wq_buoyid = #{wqBuoyid,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      wq_wattemp = #{wqWattemp,jdbcType=VARCHAR},
+      wq_seatemp = #{wqSeatemp,jdbcType=VARCHAR},
+      wq_indeptemp = #{wqIndeptemp,jdbcType=VARCHAR},
+      wq_temp = #{wqTemp,jdbcType=VARCHAR},
+      wq_salinity = #{wqSalinity,jdbcType=VARCHAR},
+      wq_conductivity = #{wqConductivity,jdbcType=VARCHAR},
+      wq_DO = #{wqDo,jdbcType=VARCHAR},
+      wq_PH = #{wqPh,jdbcType=VARCHAR},
+      wq_turbidity = #{wqTurbidity,jdbcType=VARCHAR},
+      wq_chll = #{wqChll,jdbcType=VARCHAR},
+      wq_saltemp = #{wqSaltemp,jdbcType=VARCHAR},
+      wq_co2 = #{wqCo2,jdbcType=VARCHAR},
+      wq_sc = #{wqSc,jdbcType=VARCHAR},
+      wq_datafrom = #{wqDatafrom,jdbcType=VARCHAR}
+    where wq_id = #{wqId,jdbcType=INTEGER}
+  </update>
+    <select id="selectTheLast"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM waterquality WHERE  DATE <![CDATA[     <=    ]]> 
+
+	<!-- ( SELECT lt_date FROM lasttime WHERE lt_buoy = 'waterquality' ) -->
+	( SELECT waterquality FROM receive_time where buoy_name = #{buoyId} and status = 0)
+	
+	AND wq_buoyid = #{buoyId} ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+    <select id="selectTheLast24" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM waterquality WHERE wq_buoyid = #{buoyId} ORDER BY date DESC LIMIT 0,24;
+  </select>
+  <select id="selectDateByDay"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM waterquality WHERE wq_buoyid = #{buoyId} AND DATE = #{time}
+  </select>
+  <select id="selectTheLast24WithTime" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM waterquality WHERE wq_buoyid = #{buoyId} ANd date &lt;= #{time} ORDER BY date DESC LIMIT 0,24;
+  </select>
+   <select id="selectBetweenDay" resultMap="BaseResultMap" parameterType="string">
+  	SELECT *
+	FROM waterquality
+	WHERE wq_buoyid = #{buoyId}
+		<choose>
+                <when test="fromDay != null and toDay !=null">
+                       AND DATE BETWEEN CONCAT(#{fromDay},'0000')
+    					AND CONCAT(#{toDay},'2359')
+	          			ORDER BY DATE DESC;
+                </when>
+                <otherwise>
+                       ORDER BY date DESC LIMIT 0,24;
+                 </otherwise>
+         </choose>
+  </select>
+</mapper>

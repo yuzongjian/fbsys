@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.WindMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Wind" >
+    <id column="wind_id" property="windId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="wind_buoyid" property="windBuoyid" jdbcType="VARCHAR" />
+    <result column="wind_speed_max" property="windSpeedMax" jdbcType="VARCHAR" />
+    <result column="wind_speed_maxto" property="windSpeedMaxto" jdbcType="VARCHAR" />
+    <result column="wind_speed_maxtime" property="windSpeedMaxtime" jdbcType="VARCHAR" />
+    <result column="wind_speed_ji" property="windSpeedJi" jdbcType="VARCHAR" />
+    <result column="wind_speed_jito" property="windSpeedJito" jdbcType="VARCHAR" />
+    <result column="wind_speed_jitime" property="windSpeedJitime" jdbcType="VARCHAR" />
+    <result column="wind_speed_ten" property="windSpeedTen" jdbcType="VARCHAR" />
+    <result column="wind_speed_tento" property="windSpeedTento" jdbcType="VARCHAR" />
+    <result column="wind_speed_instant" property="windSpeedInstant" jdbcType="VARCHAR" />
+    <result column="wind_to_instant" property="windToInstant" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="StatisticsResultMap" type="com.buoy.entity.StatisticsVo" >
+    <id column="b_buoyid" property="bBuoyid" jdbcType="VARCHAR" />
+    <result column="wind_speed_max" property="windSpeedMax" jdbcType="VARCHAR" />
+    <result column="wind_speed_maxto" property="windSpeedMaxto" jdbcType="VARCHAR" />
+    <result column="w_high_max" property="wHighMax" jdbcType="VARCHAR" />
+    <result column="w_high_tenth" property="wHighTenth" jdbcType="VARCHAR" />
+    <!-- <result column="wind_speed_maxtime" property="wHighTenth" jdbcType="VARCHAR" />
+    <result column="wind_speed_ji" property="windSpeedJi" jdbcType="VARCHAR" />
+    <result column="wind_speed_jito" property="windSpeedJito" jdbcType="VARCHAR" />
+    <result column="wind_speed_jitime" property="windSpeedJitime" jdbcType="VARCHAR" />
+    <result column="wind_speed_ten" property="windSpeedTen" jdbcType="VARCHAR" />
+    <result column="wind_speed_tento" property="windSpeedTento" jdbcType="VARCHAR" />
+    <result column="wind_speed_instant" property="windSpeedInstant" jdbcType="VARCHAR" />
+    <result column="wind_to_instant" property="windToInstant" jdbcType="VARCHAR" /> -->
+  </resultMap>
+  
+  
+  
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wind_id, date, wind_buoyid, wind_speed_max, wind_speed_maxto, wind_speed_maxtime, 
+    wind_speed_ji, wind_speed_jito, wind_speed_jitime, wind_speed_ten, wind_speed_tento, 
+    wind_speed_instant, wind_to_instant
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.WindExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wind
+    where wind_id = #{windId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wind
+    where wind_id = #{windId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.WindExample" >
+    delete from wind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Wind" >
+    insert into wind (wind_id, date, wind_buoyid, 
+      wind_speed_max, wind_speed_maxto, wind_speed_maxtime, 
+      wind_speed_ji, wind_speed_jito, wind_speed_jitime, 
+      wind_speed_ten, wind_speed_tento, wind_speed_instant, 
+      wind_to_instant)
+    values (#{windId,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, #{windBuoyid,jdbcType=VARCHAR}, 
+      #{windSpeedMax,jdbcType=VARCHAR}, #{windSpeedMaxto,jdbcType=VARCHAR}, #{windSpeedMaxtime,jdbcType=VARCHAR}, 
+      #{windSpeedJi,jdbcType=VARCHAR}, #{windSpeedJito,jdbcType=VARCHAR}, #{windSpeedJitime,jdbcType=VARCHAR}, 
+      #{windSpeedTen,jdbcType=VARCHAR}, #{windSpeedTento,jdbcType=VARCHAR}, #{windSpeedInstant,jdbcType=VARCHAR}, 
+      #{windToInstant,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Wind" >
+    insert into wind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="windId != null" >
+        wind_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="windBuoyid != null" >
+        wind_buoyid,
+      </if>
+      <if test="windSpeedMax != null" >
+        wind_speed_max,
+      </if>
+      <if test="windSpeedMaxto != null" >
+        wind_speed_maxto,
+      </if>
+      <if test="windSpeedMaxtime != null" >
+        wind_speed_maxtime,
+      </if>
+      <if test="windSpeedJi != null" >
+        wind_speed_ji,
+      </if>
+      <if test="windSpeedJito != null" >
+        wind_speed_jito,
+      </if>
+      <if test="windSpeedJitime != null" >
+        wind_speed_jitime,
+      </if>
+      <if test="windSpeedTen != null" >
+        wind_speed_ten,
+      </if>
+      <if test="windSpeedTento != null" >
+        wind_speed_tento,
+      </if>
+      <if test="windSpeedInstant != null" >
+        wind_speed_instant,
+      </if>
+      <if test="windToInstant != null" >
+        wind_to_instant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="windId != null" >
+        #{windId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="windBuoyid != null" >
+        #{windBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedMax != null" >
+        #{windSpeedMax,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedMaxto != null" >
+        #{windSpeedMaxto,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedMaxtime != null" >
+        #{windSpeedMaxtime,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedJi != null" >
+        #{windSpeedJi,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedJito != null" >
+        #{windSpeedJito,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedJitime != null" >
+        #{windSpeedJitime,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedTen != null" >
+        #{windSpeedTen,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedTento != null" >
+        #{windSpeedTento,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedInstant != null" >
+        #{windSpeedInstant,jdbcType=VARCHAR},
+      </if>
+      <if test="windToInstant != null" >
+        #{windToInstant,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.WindExample" resultType="java.lang.Integer" >
+    select count(*) from wind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wind
+    <set >
+      <if test="record.windId != null" >
+        wind_id = #{record.windId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windBuoyid != null" >
+        wind_buoyid = #{record.windBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedMax != null" >
+        wind_speed_max = #{record.windSpeedMax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedMaxto != null" >
+        wind_speed_maxto = #{record.windSpeedMaxto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedMaxtime != null" >
+        wind_speed_maxtime = #{record.windSpeedMaxtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedJi != null" >
+        wind_speed_ji = #{record.windSpeedJi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedJito != null" >
+        wind_speed_jito = #{record.windSpeedJito,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedJitime != null" >
+        wind_speed_jitime = #{record.windSpeedJitime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedTen != null" >
+        wind_speed_ten = #{record.windSpeedTen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedTento != null" >
+        wind_speed_tento = #{record.windSpeedTento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeedInstant != null" >
+        wind_speed_instant = #{record.windSpeedInstant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windToInstant != null" >
+        wind_to_instant = #{record.windToInstant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wind
+    set wind_id = #{record.windId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=VARCHAR},
+      wind_buoyid = #{record.windBuoyid,jdbcType=VARCHAR},
+      wind_speed_max = #{record.windSpeedMax,jdbcType=VARCHAR},
+      wind_speed_maxto = #{record.windSpeedMaxto,jdbcType=VARCHAR},
+      wind_speed_maxtime = #{record.windSpeedMaxtime,jdbcType=VARCHAR},
+      wind_speed_ji = #{record.windSpeedJi,jdbcType=VARCHAR},
+      wind_speed_jito = #{record.windSpeedJito,jdbcType=VARCHAR},
+      wind_speed_jitime = #{record.windSpeedJitime,jdbcType=VARCHAR},
+      wind_speed_ten = #{record.windSpeedTen,jdbcType=VARCHAR},
+      wind_speed_tento = #{record.windSpeedTento,jdbcType=VARCHAR},
+      wind_speed_instant = #{record.windSpeedInstant,jdbcType=VARCHAR},
+      wind_to_instant = #{record.windToInstant,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Wind" >
+    update wind
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="windBuoyid != null" >
+        wind_buoyid = #{windBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedMax != null" >
+        wind_speed_max = #{windSpeedMax,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedMaxto != null" >
+        wind_speed_maxto = #{windSpeedMaxto,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedMaxtime != null" >
+        wind_speed_maxtime = #{windSpeedMaxtime,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedJi != null" >
+        wind_speed_ji = #{windSpeedJi,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedJito != null" >
+        wind_speed_jito = #{windSpeedJito,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedJitime != null" >
+        wind_speed_jitime = #{windSpeedJitime,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedTen != null" >
+        wind_speed_ten = #{windSpeedTen,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedTento != null" >
+        wind_speed_tento = #{windSpeedTento,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeedInstant != null" >
+        wind_speed_instant = #{windSpeedInstant,jdbcType=VARCHAR},
+      </if>
+      <if test="windToInstant != null" >
+        wind_to_instant = #{windToInstant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wind_id = #{windId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Wind" >
+    update wind
+    set date = #{date,jdbcType=VARCHAR},
+      wind_buoyid = #{windBuoyid,jdbcType=VARCHAR},
+      wind_speed_max = #{windSpeedMax,jdbcType=VARCHAR},
+      wind_speed_maxto = #{windSpeedMaxto,jdbcType=VARCHAR},
+      wind_speed_maxtime = #{windSpeedMaxtime,jdbcType=VARCHAR},
+      wind_speed_ji = #{windSpeedJi,jdbcType=VARCHAR},
+      wind_speed_jito = #{windSpeedJito,jdbcType=VARCHAR},
+      wind_speed_jitime = #{windSpeedJitime,jdbcType=VARCHAR},
+      wind_speed_ten = #{windSpeedTen,jdbcType=VARCHAR},
+      wind_speed_tento = #{windSpeedTento,jdbcType=VARCHAR},
+      wind_speed_instant = #{windSpeedInstant,jdbcType=VARCHAR},
+      wind_to_instant = #{windToInstant,jdbcType=VARCHAR}
+    where wind_id = #{windId,jdbcType=INTEGER}
+  </update>
+    <select id="selectTheLast"  resultMap="BaseResultMap" parameterType="string">
+	 SELECT * FROM wind WHERE  DATE <![CDATA[     <=    ]]> 
+
+	<!-- ( SELECT lt_date FROM lasttime WHERE lt_buoy = 'wind' ) -->
+	( SELECT wind FROM receive_time where buoy_name = #{buoyId} and status = 0)
+	
+	AND wind_buoyid = #{buoyId} ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+  <select id="selectTheLast24" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM wind WHERE wind_buoyid = #{buoyId} ORDER BY date DESC LIMIT 0,24;
+  </select>
+   <select id="selectDateByDay"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM wind WHERE wind_buoyid = #{buoyId} AND DATE = #{time}
+  </select>
+  <select id="selectTheLast24WithTime" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM wind WHERE wind_buoyid = #{buoyId} AND date &lt;= #{time} ORDER BY date DESC LIMIT 0,24;
+  </select>
+  <select id="selectBetweenDay" resultMap="BaseResultMap" parameterType="string">
+  	SELECT *
+	FROM wind
+	WHERE wind_buoyid = #{buoyId}
+		<choose>
+                <when test="fromDay != null and toDay !=null">
+               	 <!--    <bind name="fromday" value="_parameter.fromDay ＋ '%'" />
+                	<bind name="today" value="_parameter.toDay ＋ '%'" /> -->
+                       AND DATE BETWEEN CONCAT(#{fromDay},'0000')
+    					AND CONCAT(#{toDay},'2359')
+	          			ORDER BY DATE DESC;
+                </when>
+                <otherwise>
+                       ORDER BY date DESC LIMIT 0,24;
+                 </otherwise>
+         </choose>
+  </select>
+  <select id="selectToExport" resultMap="BaseResultMap" parameterType="string">
+  	SELECT  
+	 	<foreach collection="params" item="item" index="index"
+            separator=",">
+            ${item}
+        </foreach>
+	FROM wind WHERE wind_buoyid = #{buoyId} ORDER BY date DESC LIMIT 0,24;
+  </select>
+  
+  <select id="selectTest" resultMap="StatisticsResultMap" >
+		  	SELECT 
+			
+			a.b_buoyid,
+			wind_speed_max,
+			wind_speed_maxto,
+			
+			w_high_max,
+			w_high_tenth
+			
+		 FROM 
+		(
+		SELECT * FROM buoy WHERE DATE BETWEEN #{time1} AND '1703172359'
+		) a,
+		(
+		SELECT * FROM wind WHERE DATE BETWEEN #{time1} AND '1703172359'
+		) b,
+		(
+		SELECT * FROM wave WHERE DATE BETWEEN #{time1} AND '1703172359'
+		) c
+		WHERE a.b_buoyid = b.wind_buoyid
+		AND b.wind_buoyid = c.w_buoyid AND
+		a.date = b.date
+		AND c.date = a.date
+		ORDER BY a.date ASC,a.b_buoyid;
+		
+  </select>
+</mapper>

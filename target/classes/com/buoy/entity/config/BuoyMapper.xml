@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.BuoyMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Buoy" >
+    <id column="b_id" property="bId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="b_buoyid" property="bBuoyid" jdbcType="VARCHAR" />
+    <result column="b_Mnum" property="bMnum" jdbcType="VARCHAR" />
+    <result column="b_rw" property="bRw" jdbcType="VARCHAR" />
+    <result column="b_longitude" property="bLongitude" jdbcType="VARCHAR" />
+    <result column="b_latitude" property="bLatitude" jdbcType="VARCHAR" />
+    <result column="b_bearing" property="bBearing" jdbcType="VARCHAR" />
+    <result column="b_voltage" property="bVoltage" jdbcType="VARCHAR" />
+    <result column="b_ridlight" property="bRidlight" jdbcType="VARCHAR" />
+    <result column="b_watpolice" property="bWatpolice" jdbcType="VARCHAR" />
+    <result column="b_doorpolice" property="bDoorpolice" jdbcType="VARCHAR" />
+    <result column="b_shift" property="bShift" jdbcType="VARCHAR" />
+    <result column="b_hatch" property="bHatch" jdbcType="VARCHAR" />
+    <result column="b_plice" property="bPlice" jdbcType="VARCHAR" />
+    <result column="b_ridlight_status" property="bRidlightStatus" jdbcType="VARCHAR" />
+    <result column="b_watpolice_status" property="bWatpoliceStatus" jdbcType="VARCHAR" />
+    <result column="b_shift_status" property="bShiftStatus" jdbcType="VARCHAR" />
+    <result column="b_free" property="bFree" jdbcType="VARCHAR" />
+    <result column="b_sensor" property="bSensor" jdbcType="VARCHAR" />
+    <result column="b_sensor_status" property="bSensorStatus" jdbcType="VARCHAR" />
+    <result column="b_sensor_police" property="bSensorPolice" jdbcType="VARCHAR" />
+    <result column="b_break_status" property="bBreakStatus" jdbcType="VARCHAR" />
+    <result column="b_datafrom" property="bDatafrom" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    b_id, date, b_buoyid, b_Mnum, b_rw, b_longitude, b_latitude, b_bearing, b_voltage, 
+    b_ridlight, b_watpolice, b_doorpolice, b_shift, b_hatch, b_plice, b_ridlight_status, 
+    b_watpolice_status, b_shift_status, b_free, b_sensor, b_sensor_status, b_sensor_police, 
+    b_break_status, b_datafrom
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.BuoyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from buoy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from buoy
+    where b_id = #{bId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from buoy
+    where b_id = #{bId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.BuoyExample" >
+    delete from buoy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Buoy" >
+    insert into buoy (b_id, date, b_buoyid, 
+      b_Mnum, b_rw, b_longitude, 
+      b_latitude, b_bearing, b_voltage, 
+      b_ridlight, b_watpolice, b_doorpolice, 
+      b_shift, b_hatch, b_plice, 
+      b_ridlight_status, b_watpolice_status, b_shift_status, 
+      b_free, b_sensor, b_sensor_status, 
+      b_sensor_police, b_break_status, b_datafrom
+      )
+    values (#{bId,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, #{bBuoyid,jdbcType=VARCHAR}, 
+      #{bMnum,jdbcType=VARCHAR}, #{bRw,jdbcType=VARCHAR}, #{bLongitude,jdbcType=VARCHAR}, 
+      #{bLatitude,jdbcType=VARCHAR}, #{bBearing,jdbcType=VARCHAR}, #{bVoltage,jdbcType=VARCHAR}, 
+      #{bRidlight,jdbcType=VARCHAR}, #{bWatpolice,jdbcType=VARCHAR}, #{bDoorpolice,jdbcType=VARCHAR}, 
+      #{bShift,jdbcType=VARCHAR}, #{bHatch,jdbcType=VARCHAR}, #{bPlice,jdbcType=VARCHAR}, 
+      #{bRidlightStatus,jdbcType=VARCHAR}, #{bWatpoliceStatus,jdbcType=VARCHAR}, #{bShiftStatus,jdbcType=VARCHAR}, 
+      #{bFree,jdbcType=VARCHAR}, #{bSensor,jdbcType=VARCHAR}, #{bSensorStatus,jdbcType=VARCHAR}, 
+      #{bSensorPolice,jdbcType=VARCHAR}, #{bBreakStatus,jdbcType=VARCHAR}, #{bDatafrom,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Buoy" >
+    insert into buoy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bId != null" >
+        b_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="bBuoyid != null" >
+        b_buoyid,
+      </if>
+      <if test="bMnum != null" >
+        b_Mnum,
+      </if>
+      <if test="bRw != null" >
+        b_rw,
+      </if>
+      <if test="bLongitude != null" >
+        b_longitude,
+      </if>
+      <if test="bLatitude != null" >
+        b_latitude,
+      </if>
+      <if test="bBearing != null" >
+        b_bearing,
+      </if>
+      <if test="bVoltage != null" >
+        b_voltage,
+      </if>
+      <if test="bRidlight != null" >
+        b_ridlight,
+      </if>
+      <if test="bWatpolice != null" >
+        b_watpolice,
+      </if>
+      <if test="bDoorpolice != null" >
+        b_doorpolice,
+      </if>
+      <if test="bShift != null" >
+        b_shift,
+      </if>
+      <if test="bHatch != null" >
+        b_hatch,
+      </if>
+      <if test="bPlice != null" >
+        b_plice,
+      </if>
+      <if test="bRidlightStatus != null" >
+        b_ridlight_status,
+      </if>
+      <if test="bWatpoliceStatus != null" >
+        b_watpolice_status,
+      </if>
+      <if test="bShiftStatus != null" >
+        b_shift_status,
+      </if>
+      <if test="bFree != null" >
+        b_free,
+      </if>
+      <if test="bSensor != null" >
+        b_sensor,
+      </if>
+      <if test="bSensorStatus != null" >
+        b_sensor_status,
+      </if>
+      <if test="bSensorPolice != null" >
+        b_sensor_police,
+      </if>
+      <if test="bBreakStatus != null" >
+        b_break_status,
+      </if>
+      <if test="bDatafrom != null" >
+        b_datafrom,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bId != null" >
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="bBuoyid != null" >
+        #{bBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="bMnum != null" >
+        #{bMnum,jdbcType=VARCHAR},
+      </if>
+      <if test="bRw != null" >
+        #{bRw,jdbcType=VARCHAR},
+      </if>
+      <if test="bLongitude != null" >
+        #{bLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="bLatitude != null" >
+        #{bLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="bBearing != null" >
+        #{bBearing,jdbcType=VARCHAR},
+      </if>
+      <if test="bVoltage != null" >
+        #{bVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="bRidlight != null" >
+        #{bRidlight,jdbcType=VARCHAR},
+      </if>
+      <if test="bWatpolice != null" >
+        #{bWatpolice,jdbcType=VARCHAR},
+      </if>
+      <if test="bDoorpolice != null" >
+        #{bDoorpolice,jdbcType=VARCHAR},
+      </if>
+      <if test="bShift != null" >
+        #{bShift,jdbcType=VARCHAR},
+      </if>
+      <if test="bHatch != null" >
+        #{bHatch,jdbcType=VARCHAR},
+      </if>
+      <if test="bPlice != null" >
+        #{bPlice,jdbcType=VARCHAR},
+      </if>
+      <if test="bRidlightStatus != null" >
+        #{bRidlightStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bWatpoliceStatus != null" >
+        #{bWatpoliceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bShiftStatus != null" >
+        #{bShiftStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bFree != null" >
+        #{bFree,jdbcType=VARCHAR},
+      </if>
+      <if test="bSensor != null" >
+        #{bSensor,jdbcType=VARCHAR},
+      </if>
+      <if test="bSensorStatus != null" >
+        #{bSensorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bSensorPolice != null" >
+        #{bSensorPolice,jdbcType=VARCHAR},
+      </if>
+      <if test="bBreakStatus != null" >
+        #{bBreakStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bDatafrom != null" >
+        #{bDatafrom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.BuoyExample" resultType="java.lang.Integer" >
+    select count(*) from buoy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update buoy
+    <set >
+      <if test="record.bId != null" >
+        b_id = #{record.bId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bBuoyid != null" >
+        b_buoyid = #{record.bBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bMnum != null" >
+        b_Mnum = #{record.bMnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bRw != null" >
+        b_rw = #{record.bRw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bLongitude != null" >
+        b_longitude = #{record.bLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bLatitude != null" >
+        b_latitude = #{record.bLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bBearing != null" >
+        b_bearing = #{record.bBearing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bVoltage != null" >
+        b_voltage = #{record.bVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bRidlight != null" >
+        b_ridlight = #{record.bRidlight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bWatpolice != null" >
+        b_watpolice = #{record.bWatpolice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bDoorpolice != null" >
+        b_doorpolice = #{record.bDoorpolice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bShift != null" >
+        b_shift = #{record.bShift,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bHatch != null" >
+        b_hatch = #{record.bHatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bPlice != null" >
+        b_plice = #{record.bPlice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bRidlightStatus != null" >
+        b_ridlight_status = #{record.bRidlightStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bWatpoliceStatus != null" >
+        b_watpolice_status = #{record.bWatpoliceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bShiftStatus != null" >
+        b_shift_status = #{record.bShiftStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bFree != null" >
+        b_free = #{record.bFree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bSensor != null" >
+        b_sensor = #{record.bSensor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bSensorStatus != null" >
+        b_sensor_status = #{record.bSensorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bSensorPolice != null" >
+        b_sensor_police = #{record.bSensorPolice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bBreakStatus != null" >
+        b_break_status = #{record.bBreakStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bDatafrom != null" >
+        b_datafrom = #{record.bDatafrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update buoy
+    set b_id = #{record.bId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=VARCHAR},
+      b_buoyid = #{record.bBuoyid,jdbcType=VARCHAR},
+      b_Mnum = #{record.bMnum,jdbcType=VARCHAR},
+      b_rw = #{record.bRw,jdbcType=VARCHAR},
+      b_longitude = #{record.bLongitude,jdbcType=VARCHAR},
+      b_latitude = #{record.bLatitude,jdbcType=VARCHAR},
+      b_bearing = #{record.bBearing,jdbcType=VARCHAR},
+      b_voltage = #{record.bVoltage,jdbcType=VARCHAR},
+      b_ridlight = #{record.bRidlight,jdbcType=VARCHAR},
+      b_watpolice = #{record.bWatpolice,jdbcType=VARCHAR},
+      b_doorpolice = #{record.bDoorpolice,jdbcType=VARCHAR},
+      b_shift = #{record.bShift,jdbcType=VARCHAR},
+      b_hatch = #{record.bHatch,jdbcType=VARCHAR},
+      b_plice = #{record.bPlice,jdbcType=VARCHAR},
+      b_ridlight_status = #{record.bRidlightStatus,jdbcType=VARCHAR},
+      b_watpolice_status = #{record.bWatpoliceStatus,jdbcType=VARCHAR},
+      b_shift_status = #{record.bShiftStatus,jdbcType=VARCHAR},
+      b_free = #{record.bFree,jdbcType=VARCHAR},
+      b_sensor = #{record.bSensor,jdbcType=VARCHAR},
+      b_sensor_status = #{record.bSensorStatus,jdbcType=VARCHAR},
+      b_sensor_police = #{record.bSensorPolice,jdbcType=VARCHAR},
+      b_break_status = #{record.bBreakStatus,jdbcType=VARCHAR},
+      b_datafrom = #{record.bDatafrom,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Buoy" >
+    update buoy
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="bBuoyid != null" >
+        b_buoyid = #{bBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="bMnum != null" >
+        b_Mnum = #{bMnum,jdbcType=VARCHAR},
+      </if>
+      <if test="bRw != null" >
+        b_rw = #{bRw,jdbcType=VARCHAR},
+      </if>
+      <if test="bLongitude != null" >
+        b_longitude = #{bLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="bLatitude != null" >
+        b_latitude = #{bLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="bBearing != null" >
+        b_bearing = #{bBearing,jdbcType=VARCHAR},
+      </if>
+      <if test="bVoltage != null" >
+        b_voltage = #{bVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="bRidlight != null" >
+        b_ridlight = #{bRidlight,jdbcType=VARCHAR},
+      </if>
+      <if test="bWatpolice != null" >
+        b_watpolice = #{bWatpolice,jdbcType=VARCHAR},
+      </if>
+      <if test="bDoorpolice != null" >
+        b_doorpolice = #{bDoorpolice,jdbcType=VARCHAR},
+      </if>
+      <if test="bShift != null" >
+        b_shift = #{bShift,jdbcType=VARCHAR},
+      </if>
+      <if test="bHatch != null" >
+        b_hatch = #{bHatch,jdbcType=VARCHAR},
+      </if>
+      <if test="bPlice != null" >
+        b_plice = #{bPlice,jdbcType=VARCHAR},
+      </if>
+      <if test="bRidlightStatus != null" >
+        b_ridlight_status = #{bRidlightStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bWatpoliceStatus != null" >
+        b_watpolice_status = #{bWatpoliceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bShiftStatus != null" >
+        b_shift_status = #{bShiftStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bFree != null" >
+        b_free = #{bFree,jdbcType=VARCHAR},
+      </if>
+      <if test="bSensor != null" >
+        b_sensor = #{bSensor,jdbcType=VARCHAR},
+      </if>
+      <if test="bSensorStatus != null" >
+        b_sensor_status = #{bSensorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bSensorPolice != null" >
+        b_sensor_police = #{bSensorPolice,jdbcType=VARCHAR},
+      </if>
+      <if test="bBreakStatus != null" >
+        b_break_status = #{bBreakStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bDatafrom != null" >
+        b_datafrom = #{bDatafrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Buoy" >
+    update buoy
+    set date = #{date,jdbcType=VARCHAR},
+      b_buoyid = #{bBuoyid,jdbcType=VARCHAR},
+      b_Mnum = #{bMnum,jdbcType=VARCHAR},
+      b_rw = #{bRw,jdbcType=VARCHAR},
+      b_longitude = #{bLongitude,jdbcType=VARCHAR},
+      b_latitude = #{bLatitude,jdbcType=VARCHAR},
+      b_bearing = #{bBearing,jdbcType=VARCHAR},
+      b_voltage = #{bVoltage,jdbcType=VARCHAR},
+      b_ridlight = #{bRidlight,jdbcType=VARCHAR},
+      b_watpolice = #{bWatpolice,jdbcType=VARCHAR},
+      b_doorpolice = #{bDoorpolice,jdbcType=VARCHAR},
+      b_shift = #{bShift,jdbcType=VARCHAR},
+      b_hatch = #{bHatch,jdbcType=VARCHAR},
+      b_plice = #{bPlice,jdbcType=VARCHAR},
+      b_ridlight_status = #{bRidlightStatus,jdbcType=VARCHAR},
+      b_watpolice_status = #{bWatpoliceStatus,jdbcType=VARCHAR},
+      b_shift_status = #{bShiftStatus,jdbcType=VARCHAR},
+      b_free = #{bFree,jdbcType=VARCHAR},
+      b_sensor = #{bSensor,jdbcType=VARCHAR},
+      b_sensor_status = #{bSensorStatus,jdbcType=VARCHAR},
+      b_sensor_police = #{bSensorPolice,jdbcType=VARCHAR},
+      b_break_status = #{bBreakStatus,jdbcType=VARCHAR},
+      b_datafrom = #{bDatafrom,jdbcType=VARCHAR}
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectTheLast"  resultMap="BaseResultMap" parameterType="string">
+  	
+  	SELECT * FROM buoy WHERE  DATE <![CDATA[     <=    ]]> 
+
+	<!-- ( SELECT lt_date FROM lasttime WHERE lt_buoy = 'buoy' ) -->
+	( SELECT buoy FROM receive_time where buoy_name = #{buoyId} and status = 0)
+	AND b_buoyid = #{buoyId} ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+    <select id="selectDateByLikeDay"  resultType="string" parameterType="string">
+  	SELECT date FROM buoy WHERE b_buoyid = #{buoyId} AND DATE LIKE '${time}%'
+  </select>
+    <select id="selectDateByDay"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM buoy WHERE b_buoyid = #{buoyId} AND DATE = #{time}
+  </select>
+   <select id="selectBetweenDay" resultMap="BaseResultMap" parameterType="string">
+  	SELECT *
+	FROM buoy
+	WHERE b_buoyid = #{buoyId}
+		<choose>
+                <when test="fromDay != null and toDay !=null">
+                        AND DATE BETWEEN CONCAT(#{fromDay},'0000')
+    					AND CONCAT(#{toDay},'2359')
+	          			ORDER BY DATE DESC;
+                </when>
+                <otherwise>
+                       ORDER BY date DESC LIMIT 0,24;
+                 </otherwise>
+         </choose>
+  </select>
+  
+</mapper>

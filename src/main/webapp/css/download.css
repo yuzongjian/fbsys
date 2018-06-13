@@ -1,0 +1,178 @@
+.change-box{
+	padding-top: 20px;
+}
+
+.change-box .change{
+	font-size: 16px;
+	font-weight: bold;
+	border:2px solid #fff;
+	border-radius: 5px;
+	float: left;
+	padding: 8px 10px;
+	color: #fff;
+}
+
+.change-box .change:hover{
+	color: #4fb5db;
+	background-color: #fff;
+}
+
+.change-box .choose-box input:first-child{
+	margin-left: 30px;
+}
+
+.change-box .choose-box input{
+	margin-left: 0;
+	margin-top: 6px;
+}
+
+.change-box .choose-box input[type='submit'],.change-box .choose-box .choose-table{
+	width: 80px;
+	border-radius: 5px;
+	margin-left: 30px;
+	line-height: 30px;
+	border:0;
+	color: #4fb5db;
+	background-color: #fff!important;
+	margin-top: 0!important;
+}
+
+.change-box .choose-box span{
+	margin: 0 5px;
+	color: #fff;
+	font-size: 14px;
+	margin-top: 6px;
+}
+
+.change-box .choose-box a{
+	color: #fff;
+	margin-left: 25px;
+}
+
+.change-box .choose-box a img{
+	width: 20px;
+	position: relative;
+	margin-right: 3px;
+	top:4px;
+}
+
+.feature-box .choose-factor a{
+	cursor: pointer;
+	border-style: dashed;
+}
+
+.change-box .choose-box .choose-table{
+	line-height: 29px;
+	padding: 0 10px;
+	display: inline-block;
+	width: auto;
+}
+
+.change-box .choose-box input{
+	color: #fff;
+	margin-left:30px; 
+	width:100px;
+	font-size: 14px;
+	background-color: #328ed1!important;
+	padding: 0 5px;
+	border:1px solid #7cbbe7;
+	font-family: '微软雅黑';
+	cursor: pointer;
+}
+
+.table-type{
+	position: absolute;
+	z-index: 10;
+	width: 300px;
+	height:200px;
+	overflow: hidden;
+	left: 50%;
+	top:50%;
+	background-color: #fff;
+	padding:5px 0;
+	border-radius: 10px;
+	margin-top: -130px;
+	margin-left: -150px;
+}
+
+.table-type .btn-box{
+	margin: 0 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.table-type .btn-box a{
+	font-size: 16px;
+	color: #333;
+	display: inline-block;
+	margin-right: 5px;
+	line-height: 32px;
+	font-family: '微软雅黑';
+	position: relative;
+	top:1px;
+	padding: 0 2px;
+}
+
+.table-type .btn-box a:last-child{
+	margin-right: 0;
+}
+
+.table-type .btn-box a.active,.table-type .btn-box a:hover{
+	border-bottom: 2px solid #78b5e9;
+}
+
+.table-type .type{
+	width:1200px;
+	font-size: 14px;
+}
+
+.table-type .type .type-box{
+	width: 260px;
+	float: left;
+	padding: 20px 20px 0 20px;
+	font-family: '微软雅黑';
+	color: #333;
+}
+
+.table-type .type .type-box .laydate-icon{
+	line-height: 25px;
+	font-size: 14px;
+	color: #333;
+	border:1px solid #ddd;
+	background-image: url(../images/blue.png);
+	padding: 0 5px;
+	cursor: pointer;
+	background-position: center right;
+	width:155px;
+	font-family: '微软雅黑';
+}
+
+.table-type .type .type-box:nth-child(2) select{
+	border:1px solid #ddd;
+	font-size: 14px;
+	color: #333;
+	font-family: '微软雅黑';
+	width:100px;
+	line-height: 20px;
+}
+
+.table-type .type .type-box input[type='text']{
+	width:110px;
+}
+
+.table-type .type .type-box input[type="submit"]{
+	width: 260px;
+	font-size: 14px;
+	color: #fff;
+	font-family: '微软雅黑';
+	background-color: #66b3f5;
+	line-height: 30px;
+	text-align: center;
+	border:0;
+	cursor: pointer;
+	margin-top: 40px;
+}
+
+.table-type .type-box span{
+	margin-left: 5px;
+	margin-right: 20px;
+}

@@ -1,0 +1,42 @@
+.page{
+	right:30px;
+	padding-top: 20px;
+	position: absolute;
+	bottom:20px;
+}
+
+.page-box{
+	height: 46px;
+}
+
+.page a,.page input[type="submit"]{
+	border:1px solid rgb(50, 142, 209);
+	display: inline-block;
+	padding:5px;
+	color: #000;
+	margin-right: 10px;
+	background-color: #fff;
+}
+
+.page span:nth-child(4){
+	margin-right: 10px;
+}
+
+.page a:nth-child(6){
+	margin-right: 20px;
+}
+
+.page input[type="text"]{
+	line-height: 20px;
+	color: #000;
+	font-family: '微软雅黑';
+	width: 30px;
+	margin: 0 5px;
+	text-align: center;
+}
+
+.page input[type="submit"]{
+	margin-left: 10px;
+	cursor: pointer;
+	margin-right: 0;
+}

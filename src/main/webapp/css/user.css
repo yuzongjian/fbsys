@@ -1,0 +1,67 @@
+.container > div table tr td, .container > div table tr th {
+    border-left: 1px solid #ddd;
+    width: 10%;
+}
+
+.container > div{
+	position: relative;
+}
+
+.container > div table tr th:nth-child(3),.container > div table tr td:nth-child(3){
+	width:45%;
+}
+
+.container > div table tr td a.delete{
+	margin-left: 8px;
+}
+
+.increase-float form div{
+	padding-top: 10px;
+	font-size: 14px;
+}
+
+.increase-float form .status > span{
+	font-size: 14px;
+	margin-right: 5px;
+	color: #000;
+}
+
+.increase-float form .right > span{
+	float: left;
+}
+
+.increase-float form .right table{
+	padding-left: 2px;
+}
+
+.increase-float form .right tr:first-child label{
+	display: inline-block;
+	padding-bottom: 5px;
+}
+
+.increase-float form .right tr td:last-child label{
+	margin-right: 0;
+}
+
+.container table td:nth-child(3) span{
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.container table td:nth-child(4) span:last-child{
+	margin-right: 0;
+}
+
+.increase-float form .right label{
+	margin-left: 5px;
+}
+
+.increase-float label{
+	font-size: 14px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.increase-float label input{
+	margin-right: 3px;
+}

@@ -1,0 +1,223 @@
+.container{
+	font-family: '微软雅黑';
+}
+
+.container > p{
+	line-height: 50px;
+	font-size: 18px;
+	color: #fff;
+}
+
+.container > div{
+	background-color: #fff;
+	border-radius: 10px;
+	padding:15px 30px 25px 30px;
+}
+
+.container > div a{
+	color: #000;
+}
+
+.container > div table{
+	width: 100%;
+	text-align: center;
+	border:1px solid #ddd;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.container > div table tr{
+	border-bottom: 1px solid #ddd;
+}
+
+.container > div table tr td,.container > div table tr th{
+	border-left: 1px solid #ddd;
+	width:25%;
+}
+
+.container > div table tr:first-child{
+	background-color: #10adff!important;
+	color: #fff;
+	font-weight: normal;
+}
+
+.container > div table tr:nth-child(2n+1){
+	background-color: #bbe6fd;
+}
+
+.container > div table tr td span.active{
+	border:1px solid #ddd;
+	background-color: #fff;
+	padding: 0 5px;
+}
+
+.container > div table tr td a.delete{
+	margin-left: 20px;
+}
+
+.container .setting{
+	line-height: 25px;
+	padding-bottom: 10px;
+}
+
+.container .setting button,.container .setting a{
+	padding: 3px 5px;
+	border:2px solid #4fb5db;
+	border-radius: 5px;
+	background-color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+	line-height: 20px;
+}
+
+.container .setting button{
+	padding: 3px 10px;
+}
+
+.container .setting button i{
+	margin-right: 3px;
+}
+
+.container .setting button:hover,.container .setting a:hover{
+	color: #4fb5db;
+}
+
+.container .setting button.yellow{
+	border:2px solid #f7e40b;
+}
+
+.container .setting button.yellow:hover{
+	color: #f7e40b;
+}
+
+.container .setting a.refresh{
+	margin-left: 30px;
+}
+
+.container .setting a.delete-btn{
+	border:2px solid #f04867;
+}
+
+.container .setting a.delete-btn:hover{
+	color: #f04867;
+}
+
+.container .setting .setting-box{
+	float: right;
+}
+
+.container .setting .setting-box a:first-child{
+	margin-right: 30px;
+}
+
+.increase-float{
+	position: absolute;
+	border-radius: 10px;
+	top:50%;
+	left: 50%;
+	background-color: #fff;
+	width: 400px;
+	padding:10px 25px;
+	color: #333;
+	font-family: '微软雅黑';
+	margin-left: -200px;
+	z-index: 100;
+}
+
+.increase-float > p{
+	font-size: 18px;
+	border-bottom: 1px solid #ddd;
+}
+
+.increase-float > p span{
+	border-bottom: 2px solid #78b5e9;
+	padding-left: 3px;
+	display: inline-block;
+	height: 32px;
+	line-height: 32px;
+}
+
+.increase-float input[type="text"],.increase-float input[type="button"],.increase-float input[type="password"]{
+	line-height: 25px;
+}
+
+.increase-float form p{
+	font-size: 14px;
+	line-height: 20px;
+	margin-top: 10px;
+}
+
+.increase-float form p span{
+	margin-left: 5px;
+}
+
+.increase-float input[type="text"],.increase-float input[type="button"],.increase-float input[type="password"],.increase-float textarea{
+	width: 100%;
+	font-size: 14px;
+	font-family: '微软雅黑';
+	resize: none;
+	margin-top: 10px;
+	padding: 0 5px;
+}
+
+.increase-float textarea{
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+.increase-float input[type="button"]{
+	background-color: #78b5e9;
+	color: #fff!important;
+	line-height: 30px;
+	border:0;
+	margin-top: 0;
+	cursor: pointer;
+	margin-bottom: 5px;
+}
+
+.increase-float input[type="button"]:hover{
+	background-color: #66b3f5;
+}
+
+.increase-float form > span{
+	line-height: 25px;
+	width: 100%;
+	position: absolute;
+}
+
+.increase-float .margintop{
+	margin-top: 25px!important;
+}
+
+.increase-float form span img{
+	width: 16px;
+	position: relative;
+	top: 3px;
+	margin-right: 5px;
+}
+
+.error{
+	position: absolute;
+	left: 50%;
+	top:-35px;
+	display: inline-block;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color: #fff;
+	z-index: 10;
+	font-family: '微软雅黑';
+	padding:5px 10px;
+	margin-left: -70px;
+}
+
+.error p{
+	font-size: 14px;
+	line-height: 25px;
+	color: #f04867;
+}
+
+.error p img{
+	position: relative;
+	top:2px;
+	margin-right: 5px;
+}

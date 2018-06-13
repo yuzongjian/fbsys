@@ -1,0 +1,173 @@
+.container{
+	font-family: '微软雅黑';
+}
+
+.container > p {
+    line-height: 50px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.container p span {
+    float: right;
+    font-size: 14px;
+}
+
+.container > p button {
+    line-height: 22px;
+    width: 50px;
+    color: rgb(255, 255, 255);
+    width: 100px;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    cursor: pointer;
+    background-color: rgb(50, 142, 209);
+    padding: 0px 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(124, 187, 231);
+}
+
+.container > div .child-box:nth-child(2n-1){
+	margin-right: 2%;
+}
+
+.child-box{
+	width: 49%;
+	float: left;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 15px 20px;
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+.child-box:nth-child(2n-1) > p{
+	text-align: right;
+}
+
+.child-box > p{
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+.child-box .control{
+	padding-top: 10px;
+}
+
+.child-box div > span{
+	font-weight: bold;
+	font-size: 16px;
+	float: left;
+	padding-top: 5px;
+}
+
+.child-box div section{
+	width:75%;
+	float: left;
+	padding-left: 20px;
+	padding-top: 3px;
+}
+
+.child-box div section input[type="text"]{
+	width: 100px;
+}
+
+.child-box div label{
+	float: right;
+}
+
+.container .qixiang > p{
+	color: #f1ce4f;
+}
+
+.container .hailiu > p{
+	color: #8175c7
+}
+
+.container .shuiwen > p{
+	color: #ff6c60
+}
+
+.container .bo > p{
+	color: #01a89e
+}
+
+.container .wind > p{
+	color: #f88920
+}
+
+.container .shuiwen .control:nth-child(4) section{
+	padding-left: 5px;
+}
+
+.container .location{
+	margin-top: -60px;
+}
+
+.container .location > p{
+	color: #4fb5db;
+}
+
+.container .bo{
+	margin-top: -65px;
+}
+
+.container .bo section{
+	padding-left: 20px;
+}
+
+.container .bo .control:nth-child(4) section{
+	padding-left: 5px;
+}
+
+input[type="checkbox"]{
+	opacity: 0;
+	float: left;
+	position: absolute;
+}
+
+input[type="checkbox"].ios-switch + div
+{
+	vertical-align: middle;
+	width: 40px;
+	height: 20px;
+	border: 1px solid rgba(0,0,0,.4);
+	border-radius: 999px;
+	background-color: #abcdef;
+	box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+	position: relative;
+}
+
+input[type="checkbox"].ios-switch:checked + div{
+	width: 40px;
+	background-position: 0 0;
+}
+
+input[type="checkbox"].tinyswitch.ios-switch + div{
+	width: 42px;
+	height: 23px;
+}
+
+input[type="checkbox"].ios-switch + div > div{
+	float: left;
+	width: 18px;
+	height: 18px;
+	border-radius: inherit;
+	background: #ffffff;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+	pointer-events: none;
+	margin-top: 1px;
+	margin-left: 1px;
+}
+
+input[type="checkbox"].tinyswitch.ios-switch + div > div{
+	width: 20px;
+	height: 20px;
+	margin-top: 1px;
+	color: black;
+	font-size: 14px;
+	position: absolute;
+	left: 0;
+}

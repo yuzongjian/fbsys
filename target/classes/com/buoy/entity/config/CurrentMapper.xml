@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.CurrentMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Current" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="c_buoyid" property="cBuoyid" jdbcType="VARCHAR" />
+    <result column="c_speed1" property="cSpeed1" jdbcType="VARCHAR" />
+    <result column="c_to1" property="cTo1" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    c_id, date, c_buoyid, c_speed1, c_to1
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.CurrentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from current
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from current
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from current
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.CurrentExample" >
+    delete from current
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Current" >
+    insert into current (c_id, date, c_buoyid, 
+      c_speed1, c_to1)
+    values (#{cId,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, #{cBuoyid,jdbcType=VARCHAR}, 
+      #{cSpeed1,jdbcType=VARCHAR}, #{cTo1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Current" >
+    insert into current
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="cBuoyid != null" >
+        c_buoyid,
+      </if>
+      <if test="cSpeed1 != null" >
+        c_speed1,
+      </if>
+      <if test="cTo1 != null" >
+        c_to1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="cBuoyid != null" >
+        #{cBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="cSpeed1 != null" >
+        #{cSpeed1,jdbcType=VARCHAR},
+      </if>
+      <if test="cTo1 != null" >
+        #{cTo1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.CurrentExample" resultType="java.lang.Integer" >
+    select count(*) from current
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update current
+    <set >
+      <if test="record.cId != null" >
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cBuoyid != null" >
+        c_buoyid = #{record.cBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cSpeed1 != null" >
+        c_speed1 = #{record.cSpeed1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cTo1 != null" >
+        c_to1 = #{record.cTo1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update current
+    set c_id = #{record.cId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=VARCHAR},
+      c_buoyid = #{record.cBuoyid,jdbcType=VARCHAR},
+      c_speed1 = #{record.cSpeed1,jdbcType=VARCHAR},
+      c_to1 = #{record.cTo1,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Current" >
+    update current
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="cBuoyid != null" >
+        c_buoyid = #{cBuoyid,jdbcType=VARCHAR},
+      </if>
+      <if test="cSpeed1 != null" >
+        c_speed1 = #{cSpeed1,jdbcType=VARCHAR},
+      </if>
+      <if test="cTo1 != null" >
+        c_to1 = #{cTo1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Current" >
+    update current
+    set date = #{date,jdbcType=VARCHAR},
+      c_buoyid = #{cBuoyid,jdbcType=VARCHAR},
+      c_speed1 = #{cSpeed1,jdbcType=VARCHAR},
+      c_to1 = #{cTo1,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+    <select id="selectTheLast"  resultMap="BaseResultMap" parameterType="string">
+  	
+  	  	SELECT * FROM current WHERE  DATE <![CDATA[     <=    ]]> 
+
+	<!-- ( SELECT lt_date FROM lasttime WHERE lt_buoy = 'current' ) -->
+	( SELECT current FROM receive_time where buoy_name = #{buoyId} and status = 0)
+	AND c_buoyid = #{buoyId} ORDER BY DATE DESC LIMIT 0,1;
+  </select>
+    <select id="selectTheLast24" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM current WHERE c_buoyid = #{buoyId} ORDER BY date DESC LIMIT 0,24;
+  </select>
+  <select id="selectTheLast24WithTime" resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM current WHERE c_buoyid = #{buoyId} ANd date &lt;= #{time} ORDER BY date DESC LIMIT 0,24;
+  </select>
+   <select id="selectDateByDay"  resultMap="BaseResultMap" parameterType="string">
+  	SELECT * FROM current WHERE c_buoyid = #{buoyId} AND DATE = #{time}
+  </select>
+   <select id="selectBetweenDay" resultMap="BaseResultMap" parameterType="string">
+  	SELECT *
+	FROM current
+	WHERE c_buoyid = #{buoyId}
+		<choose>
+                <when test="fromDay != null and toDay !=null">
+                       AND DATE BETWEEN CONCAT(#{fromDay},'0000')
+    					AND CONCAT(#{toDay},'2359')
+	          			ORDER BY DATE DESC;
+                </when>
+                <otherwise>
+                       ORDER BY date DESC LIMIT 0,24;
+                 </otherwise>
+         </choose>
+  </select>
+</mapper>

@@ -1,0 +1,36 @@
+body{
+	min-width: 1305px;
+	font-family: 微软雅黑;
+    overflow-x: hidden;
+}
+
+.clear{
+	clear: both;
+}
+
+.border-box{
+	box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+.disnone{
+	display: none;
+}
+
+.last{
+	margin-right: 0!important;
+}
+
+.container {
+    background: url(../images/bg.jpg) no-repeat;
+    background-size: 150% 100%;
+    font-size: 14px;
+    float: left;
+    margin-left: 60px;
+    padding: 0 40px;
+}
+
+.laydate-icon {
+	background-size: 20px ;
+}

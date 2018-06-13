@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">  
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> 
+      	<!-- 配置登录 成功 无权限应该走的路径 --> 
+          <property name="securityManager" ref="securityManager" />  
+          <property name="successUrl" value="/test" />  
+          <property name="loginUrl" value="/login" />  
+          <property name="unauthorizedUrl" value="/error" />  
+          <property name="filterChainDefinitions">  
+              <value>  
+              	  /css/** = anon
+				  /js/** = anon
+				  /images/** = anon
+				  /fonts/** = anon
+				  /maptile/** = anon
+				  
+                  <!-- /login=anon  
+                  /submit=anon  
+                  /log=anon
+                  /**=authc -->
+                  /logout=logout 
+              </value>  
+          </property>  
+      </bean>
+     <bean id="shiroRealm" class="com.buoy.shiro.ShiroRealm" >
+	        <!-- 配置密码验证规则 -->
+	     <property name="credentialsMatcher"  ref="credentialsMatcher"/>
+	     <!-- <property name="cachingEnabled" value="true" /> -->
+	 </bean>    
+    <bean id="credentialsMatcher"
+		class="com.buoy.shiro.RetryLimitHashedCredentialsMatcher">
+		<constructor-arg ref="cacheManager" />
+		<property name="hashAlgorithmName" value="md5" />
+		<property name="hashIterations" value="2" />
+		<property name="storedCredentialsHexEncoded" value="true" />
+	</bean>
+  	<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+      	<property name="redirectUrl" value="/login" />
+  	</bean> 
+     <!-- securityManager的配置 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+        <property name="realm" ref="shiroRealm" />  
+        <!-- 需要使用cache的话加上这句   不需要注释掉即可 shiroEhcacheManager是下面配置的bean --> <!-- cacheManager -->
+          <property name="cacheManager" ref="cacheManager" />  
+          <property name="sessionManager" ref="sessionManager" />
+	</bean>
+     <!-- 缓存管理器 使用Ehcache实现 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml" />
+	</bean>
+		
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->  
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />  
+   
+   	<bean id="sessionIdGenerator"
+		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+
+	<!-- 会话Cookie模板 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="sid" />
+		<property name="httpOnly" value="true" />
+		<property name="maxAge" value="180000" />
+	</bean>
+
+	<!-- 会话DAO -->
+	<bean id="sessionDAO"
+		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
+		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
+	</bean>
+	<!-- 会话管理器 -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- <property name="globalSessionTimeout" value="1800000" /> -->
+		<!-- <property name="globalSessionTimeout" value="-10000"/> -->
+		<property name="deleteInvalidSessions" value="true" />
+		<!-- <property name="sessionValidationSchedulerEnabled" value="true" /> -->
+		<!-- <property name="sessionValidationScheduler" ref="sessionValidationScheduler" /> -->
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionIdCookieEnabled" value="true" />
+		<property name="sessionIdCookie" ref="sessionIdCookie" />
+	</bean>
+</beans>

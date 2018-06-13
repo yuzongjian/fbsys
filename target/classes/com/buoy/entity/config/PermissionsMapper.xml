@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.PermissionsMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Permissions" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="permission" property="permission" jdbcType="CHAR" />
+    <result column="description" property="description" jdbcType="CHAR" />
+    <result column="available" property="available" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, permission, description, available
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.PermissionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from permissions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permissions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permissions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.PermissionsExample" >
+    delete from permissions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Permissions" >
+    insert into permissions (id, permission, description, 
+      available)
+    values (#{id,jdbcType=INTEGER}, #{permission,jdbcType=CHAR}, #{description,jdbcType=CHAR}, 
+      #{available,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Permissions" >
+    insert into permissions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=CHAR},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.PermissionsExample" resultType="java.lang.Integer" >
+    select count(*) from permissions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update permissions
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.permission != null" >
+        permission = #{record.permission,jdbcType=CHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=CHAR},
+      </if>
+      <if test="record.available != null" >
+        available = #{record.available,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update permissions
+    set id = #{record.id,jdbcType=INTEGER},
+      permission = #{record.permission,jdbcType=CHAR},
+      description = #{record.description,jdbcType=CHAR},
+      available = #{record.available,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Permissions" >
+    update permissions
+    <set >
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=CHAR},
+      </if>
+      <if test="available != null" >
+        available = #{available,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Permissions" >
+    update permissions
+    set permission = #{permission,jdbcType=CHAR},
+      description = #{description,jdbcType=CHAR},
+      available = #{available,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getAll" resultMap="BaseResultMap">
+	SELECT * FROM permissions;
+  </select>
+  <select id="selectPermissionByUsername" resultMap="BaseResultMap">
+		SELECT
+		  permissions.*
+		FROM user_permissions,
+		  permissions
+		WHERE user_id = (SELECT
+		                   id
+		                 FROM USER
+		                 WHERE username = #{username} AND deleted = 0)
+		    AND permissions.id = permission_id
+		    AND available = 1;
+  </select>
+</mapper>

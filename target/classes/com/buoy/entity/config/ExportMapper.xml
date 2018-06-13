@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.ExportMapper" >
+  <resultMap id="StatisticsResultMap" type="com.buoy.entity.StatisticsVo" >
+    <result column="b_buoyid" property="bBuoyid" jdbcType="VARCHAR" />
+	<result column="date" property="time" jdbcType="VARCHAR" /> 
+	<result column="b_longitude" property="bLongitude" jdbcType="VARCHAR" /> 
+	<result column="b_latitude" property="bLatitude" jdbcType="VARCHAR" /> 
+	<result column="b_watpolice" property="bWatpolice" jdbcType="VARCHAR" /> 
+	<result column="b_doorpolice" property="bDoorpolice" jdbcType="VARCHAR" /> 
+	<result column="b_shift" property="bShift" jdbcType="VARCHAR" /> 
+	<result column="b_hatch" property="bHatch" jdbcType="VARCHAR" /> 
+	<result column="b_bearing" property="bBearing" jdbcType="VARCHAR" /> 
+	<result column="b_voltage" property="bVoltage" jdbcType="VARCHAR" /> 
+	<result column="b_ridlight" property="bRidlight" jdbcType="VARCHAR" /> 
+	<result column="b_free" property="bFree" jdbcType="VARCHAR" /> 
+
+	<result column="w_airpre" property="wAirpre" jdbcType="VARCHAR" /> 
+	<result column="w_airtemp" property="wAirtemp" jdbcType="VARCHAR" /> 
+	<result column="w_oppohumi" property="wOppohumi" jdbcType="VARCHAR" />
+	 
+	<result column="wq_wattemp" property="wqWattemp" jdbcType="VARCHAR" /> 
+	<result column="wq_salinity" property="wqSalinity" jdbcType="VARCHAR" /> 
+	<result column="wq_conductivity" property="wqConductivity" jdbcType="VARCHAR" /> 
+	
+	<result column="c_speed1" property="cSpeed1" jdbcType="VARCHAR" /> 
+	<result column="c_to1" property="cTo1" jdbcType="VARCHAR" /> 
+	
+	<result column="w_high_max" property="wHighMax" jdbcType="VARCHAR" /> 
+	<result column="w_high_tenth" property="wHighTenth" jdbcType="VARCHAR" /> 
+	<result column="w_high_effective" property="wHighEffective" jdbcType="VARCHAR" /> 
+	<result column="w_high_average" property="wHighAverage" jdbcType="VARCHAR" /> 
+	<result column="w_cycle_max" property="wCycleMax" jdbcType="VARCHAR" /> 
+	<result column="w_cycle_tenth" property="wCycleTenth" jdbcType="VARCHAR" /> 
+	<result column="w_cycle_effective" property="wCycleEffective" jdbcType="VARCHAR" /> 
+	<result column="w_cycle_average" property="wCycleAverage" jdbcType="VARCHAR" /> 
+	<result column="w_to" property="wTo" jdbcType="VARCHAR" /> 
+	
+    <result column="wind_speed_max" property="windSpeedMax" jdbcType="VARCHAR" />
+    <result column="wind_speed_ji" property="windSpeedJi" jdbcType="VARCHAR" />
+    <result column="wind_speed_instant" property="windSpeedInstant" jdbcType="VARCHAR" />
+    <result column="wind_speed_ten" property="windSpeedTen" jdbcType="VARCHAR" />
+    <result column="wind_speed_maxto" property="windSpeedMaxto" jdbcType="VARCHAR" />
+    <result column="wind_speed_jito" property="windSpeedJito" jdbcType="VARCHAR" />
+    <result column="wind_to_instant" property="windToInstant" jdbcType="VARCHAR" />
+    <result column="wind_speed_tento" property="windSpeedTento" jdbcType="VARCHAR" />
+    <!-- <result column="wind_speed_maxtime" property="wHighTenth" jdbcType="VARCHAR" />
+    <result column="wind_speed_ji" property="windSpeedJi" jdbcType="VARCHAR" />
+    <result column="wind_speed_jito" property="windSpeedJito" jdbcType="VARCHAR" />
+    <result column="wind_speed_jitime" property="windSpeedJitime" jdbcType="VARCHAR" />
+    <result column="wind_speed_ten" property="windSpeedTen" jdbcType="VARCHAR" />
+    <result column="wind_speed_tento" property="windSpeedTento" jdbcType="VARCHAR" />
+    <result column="wind_speed_instant" property="windSpeedInstant" jdbcType="VARCHAR" />
+    <result column="wind_to_instant" property="windToInstant" jdbcType="VARCHAR" /> -->
+  </resultMap>
+  
+  <select id="selectToExport" resultMap="StatisticsResultMap" >
+	
+	SELECT 
+
+		a.b_buoyid,
+        a.date
+	        
+		<foreach collection="list" item="item" index="index"
+            separator="," open=",">
+            ${item}
+        </foreach>
+	 FROM buoy  a 
+	LEFT JOIN wind b ON a.b_buoyid = b.wind_buoyid AND a.date = b.date AND b.date BETWEEN CONCAT(#{fromDay},'0000') AND CONCAT(#{toDay},'2359')
+	LEFT JOIN wave c ON a.b_buoyid = c.w_buoyid AND a.date = c.date AND c.date BETWEEN CONCAT(#{fromDay},'0000') AND CONCAT(#{toDay},'2359')
+	LEFT JOIN waterquality d ON a.b_buoyid = d.wq_buoyid AND a.date = d.date AND d.date BETWEEN CONCAT(#{fromDay},'0000') AND CONCAT(#{toDay},'2359')
+	LEFT JOIN current e ON a.b_buoyid = e.c_buoyid AND a.date = e.date AND e.date BETWEEN CONCAT(#{fromDay},'0000') AND CONCAT(#{toDay},'2359')
+	LEFT JOIN weather f ON a.b_buoyid = f.w_buoyid AND a.date = f.date AND f.date BETWEEN CONCAT(#{fromDay},'0000') AND CONCAT(#{toDay},'2359')
+	WHERE a.date BETWEEN CONCAT(#{fromDay},'0000') AND CONCAT(#{toDay},'2359')
+	ORDER BY a.date ASC,a.b_buoyid;
+		
+  </select>
+    <select id="selectToExportByYear" resultMap="StatisticsResultMap" >
+	
+	SELECT 
+
+		a.b_buoyid,
+        a.date
+	        
+		<foreach collection="list" item="item" index="index"
+            separator="," open=",">
+            ${item}
+        </foreach>
+	 FROM buoy  a 
+	LEFT JOIN wind b ON a.b_buoyid = b.wind_buoyid AND a.date = b.date AND b.date LIKE CONCAT(#{year},'%')
+	LEFT JOIN wave c ON a.b_buoyid = c.w_buoyid AND a.date = c.date AND c.date LIKE CONCAT(#{year},'%')
+	LEFT JOIN waterquality d ON a.b_buoyid = d.wq_buoyid AND a.date = d.date AND d.date LIKE CONCAT(#{year},'%')
+	LEFT JOIN current e ON a.b_buoyid = e.c_buoyid AND a.date = e.date AND e.date LIKE CONCAT(#{year},'%')
+	LEFT JOIN weather f ON a.b_buoyid = f.w_buoyid AND a.date = f.date AND f.date LIKE CONCAT(#{year},'%')
+	WHERE a.date LIKE CONCAT(#{year},'%')
+	ORDER BY a.date ASC,a.b_buoyid;
+		
+  </select>
+  <!-- 弃用？？ -->
+  <select id="selectByLastTime" resultMap="StatisticsResultMap">
+	  	SELECT 
+		a.b_buoyid,
+	        a.date,
+	        a.b_longitude,
+	        a.b_latitude,
+	        a.b_watpolice,
+	        a.b_doorpolice,
+	        a.b_shift,
+	        a.b_hatch,
+	        a.b_bearing,
+	        a.b_voltage,
+	        a.b_ridlight,        
+	        a.b_free,
+	        
+		w_airpre,
+		w_airtemp,
+		w_oppohumi,
+		
+		wq_wattemp,
+		wq_salinity,
+		wq_conductivity,
+	
+		c_speed1,
+		c_to1,
+		
+		w_high_max,
+		w_high_tenth,
+		w_high_effective,
+		w_high_average,
+		w_cycle_max,
+		w_cycle_tenth,
+		w_cycle_effective,
+		w_cycle_average,
+		w_to,
+		
+		wind_speed_max,
+		wind_speed_ji,
+		wind_speed_instant,
+		wind_speed_ten,
+		wind_speed_maxto,
+		wind_speed_jito,
+		wind_to_instant,
+		wind_speed_tento
+	
+	 FROM buoy  a 
+	LEFT JOIN wind b ON a.b_buoyid = b.wind_buoyid AND a.date = b.date
+	LEFT JOIN wave c ON a.b_buoyid = c.w_buoyid AND a.date = c.date
+	LEFT JOIN waterquality d ON a.b_buoyid = d.wq_buoyid AND a.date = d.date
+	LEFT JOIN current e ON a.b_buoyid = e.c_buoyid AND a.date = e.date 
+	LEFT JOIN weather f ON a.b_buoyid = f.w_buoyid AND a.date = f.date 
+	WHERE a.date = (
+	SELECT lt_date FROM lasttime WHERE lt_buoy = 'buoy'
+	) ;
+  
+  </select>
+  
+  <select id="selectBuoyByTime" resultMap="StatisticsResultMap">
+  		SELECT 
+		a.b_buoyid,
+	        a.date,
+	        a.b_longitude,
+	        a.b_latitude,
+	        a.b_watpolice,
+	        a.b_doorpolice,
+	        a.b_shift,
+	        a.b_hatch,
+	        a.b_bearing,
+	        a.b_voltage,
+	        a.b_ridlight,        
+	        a.b_free,
+	        
+		w_airpre,
+		w_airtemp,
+		w_oppohumi,
+		
+		wq_wattemp,
+		wq_salinity,
+		wq_conductivity,
+	
+		c_speed1,
+		c_to1,
+		
+		w_high_max,
+		w_high_tenth,
+		w_high_effective,
+		w_high_average,
+		w_cycle_max,
+		w_cycle_tenth,
+		w_cycle_effective,
+		w_cycle_average,
+		w_to,
+		
+		wind_speed_max,
+		wind_speed_ji,
+		wind_speed_instant,
+		wind_speed_ten,
+		wind_speed_maxto,
+		wind_speed_jito,
+		wind_to_instant,
+		wind_speed_tento
+	
+	 FROM buoy  a 
+	LEFT JOIN wind b ON  b.wind_buoyid = #{buoy} AND b.date = #{time}
+	LEFT JOIN wave c ON c.w_buoyid = #{buoy} AND c.date = #{time}
+	LEFT JOIN waterquality d ON d.wq_buoyid = #{buoy} AND  d.date = #{time}
+	LEFT JOIN current e ON e.c_buoyid = #{buoy} AND  e.date = #{time}
+	LEFT JOIN weather f ON f.w_buoyid = #{buoy} AND  f.date = #{time}
+	WHERE a.b_buoyid = #{buoy} AND a.date = #{time};
+  </select>
+
+  
+  
+</mapper>

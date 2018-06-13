@@ -1,0 +1,100 @@
+.container{
+	font-family: '微软雅黑'
+}
+
+.container .head{
+	color: #fff;
+	font-size: 18px;
+}
+
+.container .head p{
+	line-height: 50px;
+	padding-right: 20px;
+}
+
+.container .head p span{
+	float: right;
+	font-size: 14px;
+}
+
+.container .head p span input:first-child{
+	margin-right:10px;
+	margin-left:30px;
+}
+
+.container .head p span input.to{
+	margin-left:10px;
+	margin-right: 20px;
+}
+
+.container .head p span select{
+	font-family: '微软雅黑';
+	border:1px solid #fff;
+	background-color: #328ed1;
+	color: #fff;
+	margin-left: 5px;
+}
+
+.container .head p span input[type='submit']{
+	line-height: 22px;
+	width: 50px;
+	margin-left: 20px;
+}
+
+.container .head p span input{
+	color: #fff; 
+	width:100px;
+	font-size: 14px;
+	background-color: #328ed1!important;
+	padding: 0 5px;
+	border:1px solid #7cbbe7;
+	font-family: '微软雅黑';
+	cursor: pointer;
+}
+
+.container .table-box{
+	background-color: #fff;
+	border-radius: 10px;
+	padding:30px 30px 20px 30px;
+	position: relative;
+}
+
+.container > div table{
+	width: 100%;
+	text-align: center;
+	border:1px solid #ddd;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.container > div table tr{
+	border-bottom: 1px solid #ddd;
+}
+
+.container > div table tr td{
+	width: 20%;
+}
+
+.container > div table tr td:last-child{
+	width: 60%;
+	padding:0 20px;
+}
+
+.container > div table tr td,.container > div table tr th{
+	border-left: 1px solid #ddd;
+	width:25%;
+}
+
+.container > div table tr:first-child{
+	background-color: #10adff!important;
+	color: #fff;
+	font-weight: normal;
+}
+
+.container > div table tr:nth-child(2n+1){
+	background-color: #bbe6fd;
+}
+
+.choose-box input:nth-child(3){
+	margin-left: 0!important;
+}

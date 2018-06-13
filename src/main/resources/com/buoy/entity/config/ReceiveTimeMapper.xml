@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.ReceiveTimeMapper" >
+  <resultMap id="ReceiveTime" type="com.buoy.entity.ReceiveTime" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="buoy_id" property="buoyId" jdbcType="INTEGER" />
+    <result column="buoy_name" property="buoyName" jdbcType="VARCHAR" />
+    <result column="buoy" property="buoy" jdbcType="VARCHAR" />
+    <result column="current" property="current" jdbcType="VARCHAR" />
+    <result column="waterQuality" property="waterQuality" jdbcType="VARCHAR" />
+    <result column="wave" property="wave" jdbcType="VARCHAR" />
+    <result column="weather" property="weather" jdbcType="VARCHAR" />
+    <result column="wind" property="wind" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	<sql id="columns">
+	<![CDATA[
+		`id`,`buoy_id`,`buoy_name`,`buoy`,`current`,`waterQuality`,
+		`wave`,`weather`,`wind`
+	]]>
+	</sql>
+  
+  <select id="getByBuoyId" resultMap="ReceiveTime">
+  	select 
+  		<include refid="columns"/>
+  	from `receive_time` where `buoy_id` = #{id}  AND `status` = 0;
+  </select>
+  <select id="getListByStatus" resultMap="ReceiveTime">
+  	select 
+  		<include refid="columns"/>
+  	from `receive_time` where `status` = #{status};
+  </select>
+  
+  <update id="updateBuoyById">
+  	UPDATE `receive_time` SET `buoy` = #{time} WHERE `id` = #{id};
+  </update>
+  <update id="updateCurrentById">
+  	UPDATE `receive_time` SET `current` = #{time} WHERE `id` = #{id};
+  </update>
+  <update id="updateWaterqualityById">
+  	UPDATE `receive_time` SET `waterquality` = #{time} WHERE `id` = #{id};
+  </update>
+  <update id="updateWaveById">
+  	UPDATE `receive_time` SET `wave` = #{time} WHERE `id` = #{id};
+  </update>
+  <update id="updateWeatherById">
+  	UPDATE `receive_time` SET `weather` = #{time} WHERE `id` = #{id};
+  </update>
+  <update id="updateWindById">
+  	UPDATE `receive_time` SET `wind` = #{time} WHERE `id` = #{id};
+  </update>
+  
+  <update id="updateStatus">
+  	UPDATE	`receive_time` SET `STATUS` = #{status} WHERE `buoy_id` = #{buoyId};
+  </update>
+  
+  <update id="updateBuoyName">
+  	UPDATE	`receive_time` SET `buoy_name` = #{name} WHERE `buoy_id` = #{buoyId};
+  </update>
+  
+  <insert id="insert" >
+  	INSERT INTO `receive_time` 
+	(
+		`buoy_id`,
+		`buoy_name`,
+		`buoy`,
+		`current`,
+		`waterquality`,
+		`wave`,
+		`weather`,
+		`wind`
+	)
+	VALUES 
+	(
+		#{rt.buoyId},
+		#{rt.buoyName},
+		#{rt.buoy},
+		#{rt.current},
+		#{rt.waterQuality},
+		#{rt.wave},
+		#{rt.weather},
+		#{rt.wind}
+	)
+  </insert>
+</mapper>

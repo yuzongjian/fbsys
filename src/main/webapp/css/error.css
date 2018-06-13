@@ -1,0 +1,47 @@
+body{
+	background-image: url(../images/bg.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.error{
+	background-color: #52b3cc;
+	margin:90px auto;
+	border-radius: 10px;
+	width: 410px;
+	height:180px;
+	box-shadow: 1px 1px 20px rgba(0,0,0,.6);
+	padding: 20px;
+	padding-top: 40px;
+	color: #fff;
+	font-size: 20px;
+	font-family: '微软雅黑';
+	line-height: 40px;
+	position: relative;
+}
+
+.error > img{
+	position: absolute;
+	top:-70px;
+	left: -50px;
+	opacity: .8;
+}
+
+.error span{
+	position: absolute;
+	top:-30px;
+	left: -10px;
+	z-index: 10;
+	color: #d81d01;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 30px;
+}
+
+.error span img{
+	float: left;
+}
+
+.ha{
+	left:10px!important;
+}

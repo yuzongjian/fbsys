@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buoy.mapper.AlarmlogMapper" >
+  <resultMap id="BaseResultMap" type="com.buoy.entity.Alarmlog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="CHAR" />
+    <result column="summary" property="summary" jdbcType="CHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="active" property="active" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, date, summary, details, user_id, active
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.buoy.entity.AlarmlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from alarmlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarmlog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from alarmlog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buoy.entity.AlarmlogExample" >
+    delete from alarmlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buoy.entity.Alarmlog" >
+    insert into alarmlog (id, date, summary, 
+      details, user_id, active
+      )
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=CHAR}, #{summary,jdbcType=CHAR}, 
+      #{details,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{active,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.buoy.entity.Alarmlog" >
+    insert into alarmlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=CHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=CHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buoy.entity.AlarmlogExample" resultType="java.lang.Integer" >
+    select count(*) from alarmlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update alarmlog
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=CHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=CHAR},
+      </if>
+      <if test="record.details != null" >
+        details = #{record.details,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.active != null" >
+        active = #{record.active,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update alarmlog
+    set id = #{record.id,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=CHAR},
+      summary = #{record.summary,jdbcType=CHAR},
+      details = #{record.details,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      active = #{record.active,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buoy.entity.Alarmlog" >
+    update alarmlog
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=CHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=CHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buoy.entity.Alarmlog" >
+    update alarmlog
+    set date = #{date,jdbcType=CHAR},
+      summary = #{summary,jdbcType=CHAR},
+      details = #{details,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      active = #{active,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch" parameterType="int">
+  	insert into alarmlog (date,summary,details)   
+    values  
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.date},#{item.summary},#{item.details})  
+    </foreach> 
+  </insert>
+  <select id="selectByPage" resultMap="BaseResultMap">
+  	select * from alarmlog
+  	<if test="fromDay != null or toDay != null">
+  		<where>
+  			<if test="fromDay != null and toDay != null">
+  				date <![CDATA[ >=]]> CONCAT(#{fromDay},' 00:00')
+  				AND date <![CDATA[ <]]> CONCAT(#{toDay},' 23:59')
+  			</if>
+  			<if test="fromDay != null and toDay == null">
+  				date like CONCAT(#{fromDay},'%')
+  			</if>
+  			<if test="fromDay == null and toDay != null">
+  				date like CONCAT(#{toDay},'%')
+  			</if>
+  		</where>
+  	</if>
+  	order by date desc
+  	<if test="page != null">
+  		limit #{page.offset},#{page.limit}
+  	</if>
+  	;
+  </select>
+  
+  <select id="selectCount" resultType="int">
+  	select count(*) from alarmlog 
+  		<where>
+  			<if test="fromDay != null and toDay != null">
+  				date <![CDATA[ >=]]> CONCAT(#{fromDay},' 00:00')
+  				AND date <![CDATA[ <]]> CONCAT(#{toDay},' 23:59')
+  			</if>
+  		</where>
+  	order by date ;
+  </select>
+<!--   <select id="selectLike" resultMap="BaseResultMap">
+  	select * from alarmlog
+  	<where>
+  		date like CONCAT(#{day},'%')
+  	</where>
+  	order by date desc;
+  </select> -->
+  <select id="selectLogByBuoyIdAndDate" resultMap="BaseResultMap">
+  	SELECT * FROM alarmlog WHERE buoy_id = #{buoy} AND DATE
+  	 LIKE CONCAT(#{day},'%');
+  	 
+  </select>
+  <select id="getActiveLog" resultMap="BaseResultMap">
+  	SELECT * FROM alarmlog WHERE active = 0 ORDER BY DATE;
+  </select>
+  
+  <update id="updateActiveLog"  >
+  	UPDATE alarmlog SET active = 1 WHERE id = #{id};
+  </update>
+</mapper>
